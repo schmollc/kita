@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="messagesTournamentEventBrowse"
+			showDetail="true" />
+
+		<div class="divStartHeader"/>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton
+					actionListener="#{tournamentEventBrowsePageBean.add}"
+					icon="ui-icon-plus"
+					update="messagesTournamentEventBrowse">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{tournamentEventBrowsePageBean.onEditClosed}"
+						update="tournamentEventTable" />
+				</p:commandButton>
+				<p:commandButton
+					actionListener="#{tournamentEventBrowsePageBean.edit}"
+					icon="ui-icon-pencil"
+					update="messagesTournamentEventBrowse">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{tournamentEventBrowsePageBean.onEditClosed}"
+						update="tournamentEventTable" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<p:dataTable
+			var="tournamentEvent"
+			id="tournamentEventTable"
+			value="#{tournamentEventBrowsePageBean.tournamentEvents}"
+			selection="#{tournamentEventBrowsePageBean.selectedTournamentEvent}"
+			selectionMode="single"
+			scrollable="true"
+			scrollHeight="92%"
+			rowKey="#{tournamentEvent.uuid}"
+			resizableColumns="true">
+			<f:facet name="header">
+	        	In total there are #{tournamentEventBrowsePageBean.getNumberOfResults()} events.
+	    	</f:facet>
+
+			<p:column
+				headerText="Date"
+				width="10%">
+				<h:outputText
+					value="#{tournamentEvent.eventDay}"
+					style="float:center" />
+			</p:column>
+
+			<p:column
+				headerText="Event"
+				width="48%">
+				<h:outputText value="#{tournamentEvent.name}" />
+			</p:column>
+
+		</p:dataTable>
+
+		<ui:include src="/dock.xhtml" />
+
+	</h:form>
+</h:body>
+</html>
