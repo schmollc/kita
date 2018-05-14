@@ -9,14 +9,68 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head>
-	<title>Tournament Landing Page</title>
 </h:head>
 <h:body>
 	<h:form id="form">
-		<h4>Welcome to the Tournament landing page.</h4>
+		<p:growl
+			id="messagesTournamentEventBrowse"
+			showDetail="true" />
+
+		<div class="divStartHeader"/>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton
+					actionListener="#{tournamentEventBrowsePageBean.add}"
+					icon="ui-icon-plus"
+					update="messagesTournamentEventBrowse">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{tournamentEventBrowsePageBean.onEditClosed}"
+						update="tournamentEventTable" />
+				</p:commandButton>
+				<p:commandButton
+					actionListener="#{tournamentEventBrowsePageBean.edit}"
+					icon="ui-icon-pencil"
+					update="messagesTournamentEventBrowse">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{tournamentEventBrowsePageBean.onEditClosed}"
+						update="tournamentEventTable" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<p:dataTable
+			var="tournamentEvent"
+			id="tournamentEventTable"
+			value="#{tournamentEventBrowsePageBean.tournamentEvents}"
+			selection="#{tournamentEventBrowsePageBean.selectedTournamentEvent}"
+			selectionMode="single"
+			scrollable="true"
+			scrollHeight="92%"
+			rowKey="#{tournamentEvent.uuid}"
+			resizableColumns="true">
+			<f:facet name="header">
+	        	In total there are #{tournamentEventBrowsePageBean.getNumberOfResults()} events.
+	    	</f:facet>
+
+			<p:column
+				headerText="Date"
+				width="10%">
+				<h:outputText
+					value="#{tournamentEvent.eventDay}"
+					style="float:center" />
+			</p:column>
+
+			<p:column
+				headerText="Event"
+				width="48%">
+				<h:outputText value="#{tournamentEvent.name}" />
+			</p:column>
+
+		</p:dataTable>
 
 		<ui:include src="/dock.xhtml" />
-	
+
 	</h:form>
 </h:body>
 </html>

@@ -24,6 +24,12 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.kita</groupId>
+			<artifactId>kita-domain-model</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
 		<!-- JSF needed Dependencies -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>

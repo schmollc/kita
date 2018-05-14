@@ -15,6 +15,7 @@
 
 	<modules>
 		<module>kita-web</module>
+		<module>kita-domain-model</module>
 	</modules>
 
 	<build>
