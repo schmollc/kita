@@ -2,6 +2,7 @@ package com.kita.web.bridge;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 import com.kita.TournamentEvent;
 import com.kita.orm.GatewayType;
@@ -31,5 +32,10 @@ public class TournamentEventBridgeImpl implements Serializable, TournamentEventB
 	@Override
 	public void set(TournamentEvent aTournamentEvent) {
 		getGateway().set(aTournamentEvent);
+	}
+
+	@Override
+	public TournamentEvent get(UUID anUuid) {
+		return TournamentEvent.newInstance();
 	}
 }

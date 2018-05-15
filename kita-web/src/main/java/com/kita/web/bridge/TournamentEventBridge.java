@@ -1,6 +1,7 @@
 package com.kita.web.bridge;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.kita.TournamentEvent;
 
@@ -12,4 +13,6 @@ public interface TournamentEventBridge {
 	List<TournamentEvent> all();
 
 	void set(TournamentEvent aTournamentEvent);
+
+	TournamentEvent get(UUID anUuid);
 }
