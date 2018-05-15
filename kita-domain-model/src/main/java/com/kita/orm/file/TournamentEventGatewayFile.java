@@ -1,6 +1,7 @@
 package com.kita.orm.file;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.kita.TournamentEvent;
 import com.kita.orm.TournamentEventGateway;
@@ -58,5 +59,16 @@ public class TournamentEventGatewayFile implements TournamentEventGateway {
 
 	void clear() {
 		FileSingleton.getInstance().clear();
+	}
+
+	@Override
+	public TournamentEvent get(UUID uuid) {
+		for (TournamentEvent eachTournamentEvent : getAll()) {
+			if (uuid.equals(eachTournamentEvent.getUuid())) {
+				return eachTournamentEvent;
+			}
+		}
+		// TODO -medium- Use the <Optional> Pattern from jdk
+		return null;
 	}
 }

@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -68,6 +69,42 @@ public abstract class TournamentEventGatewayTest {
 
 		assertEquals("[name] not correct!", expectedEventname, actualTournamentEventRundUmEnnepetal.getName());
 		assertEquals("[eventDay] not correct!", expectedEventDay, actualTournamentEventRundUmEnnepetal.getEventDay());
+	}
 
+	@Test
+	public void testGet_WithExistingEntry() {
+		TournamentEvent expected = createKickerTurnierSWD();
+
+		getSut().set(createKickerTurnierBSOD());
+		getSut().set(expected);
+
+		TournamentEvent actual = getSut().get(expected.getUuid());
+
+		assertNotNull("[get] has incorrect return value!", actual);
+		assertEquals("[get] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testGet_WithNonExistingEntry() {
+		getSut().set(createKickerTurnierBSOD());
+		getSut().set(createKickerTurnierSWD());
+
+		TournamentEvent actual = getSut().get(UUID.randomUUID());
+
+		assertNull(actual);
+	}
+
+	private TournamentEvent createKickerTurnierSWD() {
+		Eventname eventname = Eventname.newInstance("SWD KickerTurnier");
+		EventDay eventDay = EventDay.newInstance(LocalDate.of(2018, Month.JANUARY, 31));
+		TournamentEvent kickerTurnier = TournamentEvent.newInstance(eventname, eventDay);
+		return kickerTurnier;
+	}
+
+	private TournamentEvent createKickerTurnierBSOD() {
+		Eventname eventname = Eventname.newInstance("BSOD KickerTurnier");
+		EventDay eventDay = EventDay.newInstance(LocalDate.of(2018, Month.FEBRUARY, 1));
+		TournamentEvent kickerTurnier = TournamentEvent.newInstance(eventname, eventDay);
+		return kickerTurnier;
 	}
 }
