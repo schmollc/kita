@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -22,7 +23,7 @@ import com.kita.attributes.Eventname;
 import com.kita.web.local.I18N;
 
 /**
- * @since 08.03.2018
+ * @since 13.05.2018
  *
  */
 @ManagedBean
@@ -33,6 +34,9 @@ public class TournamentEventBrowsePageBean implements Serializable {
 	private TournamentEvent selectedTournamentEvent = null;
 
 	private List<TournamentEvent> searchResult = new ArrayList<>();
+
+	@ManagedProperty(value = "#{tournamentEventEditPageBean}")
+	private TournamentEventEditPageBean tournamentEventEditPageBean;
 
 	@PostConstruct
 	public void init() {
@@ -55,8 +59,16 @@ public class TournamentEventBrowsePageBean implements Serializable {
 		selectedTournamentEvent = aTournamentEvent;
 	}
 
+	public TournamentEventEditPageBean getTournamentEventEditPageBean() {
+		return tournamentEventEditPageBean;
+	}
+
+	public void setTournamentEventEditPageBean(TournamentEventEditPageBean aTournamentEventEditPageBean) {
+		tournamentEventEditPageBean = aTournamentEventEditPageBean;
+	}
+
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
+		getTournamentEventEditPageBean().openDialogForCreateRelayEvent();
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
