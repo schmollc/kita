@@ -1,8 +1,6 @@
 package com.kita.web.pagebean;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +16,8 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.SelectEvent;
 
 import com.kita.TournamentEvent;
-import com.kita.attributes.EventDay;
-import com.kita.attributes.Eventname;
+import com.kita.web.bridge.TournamentEventBridge;
+import com.kita.web.bridge.TournamentEventBridgeImpl;
 import com.kita.web.local.I18N;
 
 /**
@@ -35,12 +33,22 @@ public class TournamentEventBrowsePageBean implements Serializable {
 
 	private List<TournamentEvent> searchResult = new ArrayList<>();
 
+	private TournamentEventBridge tournamentEventBridge;
+
 	@ManagedProperty(value = "#{tournamentEventEditPageBean}")
 	private TournamentEventEditPageBean tournamentEventEditPageBean;
 
 	@PostConstruct
 	public void init() {
 		refreshTournamentEvents();
+	}
+
+	public TournamentEventBrowsePageBean() {
+		tournamentEventBridge = new TournamentEventBridgeImpl();
+	}
+
+	private TournamentEventBridge getTournamentEventBridge() {
+		return tournamentEventBridge;
 	}
 
 	public List<TournamentEvent> getTournamentEvents() {
@@ -80,14 +88,15 @@ public class TournamentEventBrowsePageBean implements Serializable {
 	}
 
 	private void refreshTournamentEvents() {
-		searchResult = new ArrayList<>();
-		EventDay eventDayFirstEvent = EventDay.newInstance(LocalDate.of(2018, Month.JANUARY, 31));
-		Eventname eventnameFirstEvent = Eventname.newInstance("1. Kicker Turnier");
-		searchResult.add(TournamentEvent.newInstance(eventnameFirstEvent, eventDayFirstEvent));
+		searchResult = getTournamentEventBridge().all();
 
-		EventDay eventDaySecondEvent = EventDay.newInstance(LocalDate.of(2018, Month.APRIL, 16));
-		Eventname eventnameSecondEvent = Eventname.newInstance("2. Kicker Turnier");
-		searchResult.add(TournamentEvent.newInstance(eventnameSecondEvent, eventDaySecondEvent));
+		//		EventDay eventDayFirstEvent = EventDay.newInstance(LocalDate.of(2018, Month.JANUARY, 31));
+		//		Eventname eventnameFirstEvent = Eventname.newInstance("1. Kicker Turnier");
+		//		searchResult.add(TournamentEvent.newInstance(eventnameFirstEvent, eventDayFirstEvent));
+		//
+		//		EventDay eventDaySecondEvent = EventDay.newInstance(LocalDate.of(2018, Month.APRIL, 16));
+		//		Eventname eventnameSecondEvent = Eventname.newInstance("2. Kicker Turnier");
+		//		searchResult.add(TournamentEvent.newInstance(eventnameSecondEvent, eventDaySecondEvent));
 
 	}
 
@@ -100,5 +109,4 @@ public class TournamentEventBrowsePageBean implements Serializable {
 		FacesMessage message = new FacesMessage(severity, summary, textMessage);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
-
 }

@@ -36,6 +36,6 @@ public class TournamentEventBridgeImpl implements Serializable, TournamentEventB
 
 	@Override
 	public TournamentEvent get(UUID anUuid) {
-		return TournamentEvent.newInstance();
+		return getGateway().get(anUuid);
 	}
 }
