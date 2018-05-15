@@ -56,7 +56,7 @@ public class TournamentEventEditPageBean implements Serializable {
 	}
 
 	void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().width(500).height(400).build();
+		Map<String, Object> options = new DialogOptionsBuilder().width(400).height(200).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.TOURNAMENT_EVENT_EDIT_DIALOG_ID, options, null);
 	}
 
