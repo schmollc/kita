@@ -50,19 +50,25 @@
 			rowKey="#{tournamentEvent.uuid}"
 			resizableColumns="true">
 			<f:facet name="header">
-	        	In total there are #{tournamentEventBrowsePageBean.getNumberOfResults()} events.
+	        	In total there are #{tournamentEventBrowsePageBean.getNumberOfResults()} event(s).
 	    	</f:facet>
 
 			<p:column
 				headerText="Date"
+				filterBy="#{tournamentEvent.day}"
+				sortBy="#{tournamentEvent.day}"
+				sortFunction="#{tournamentEventBrowsePageBean.sortByDay}"
 				width="10%">
 				<h:outputText
-					value="#{tournamentEvent.eventDay}"
+					value="#{tournamentEvent.day}"
 					style="float:center" />
 			</p:column>
 
 			<p:column
 				headerText="Event"
+				filterBy="#{tournamentEvent.name}"
+				sortBy="#{tournamentEvent.name}"
+				sortFunction="#{tournamentEventBrowsePageBean.sortByName}"
 				width="48%">
 				<h:outputText value="#{tournamentEvent.name}" />
 			</p:column>

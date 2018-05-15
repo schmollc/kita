@@ -2,6 +2,7 @@ package com.kita.orm.memory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.kita.TournamentEvent;
 import com.kita.orm.TournamentEventGateway;
@@ -32,5 +33,10 @@ public class TournamentEventGatewayMemory implements TournamentEventGateway {
 	@Override
 	public void set(TournamentEvent tournamentEvent) {
 		MemorySingleton.getInstance().getTournamentEvents().put(tournamentEvent.getUuid(), tournamentEvent);
+	}
+
+	@Override
+	public TournamentEvent get(UUID uuid) {
+		return MemorySingleton.getInstance().getTournamentEvents().get(uuid);
 	}
 }

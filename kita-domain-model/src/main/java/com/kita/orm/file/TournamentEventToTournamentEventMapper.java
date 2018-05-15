@@ -27,7 +27,7 @@ public class TournamentEventToTournamentEventMapper implements Serializable {
 			throw new IllegalArgumentException("[target] must not be 'null'!");
 		}
 
-		target.setEventDay(source.getEventDay());
+		target.setDay(source.getDay());
 		target.setName(source.getName());
 	}
 

@@ -112,6 +112,29 @@ public class EventDayTest {
 	}
 
 	@Test
+	public void testSortByDay() {
+		EventDay day1 = EventDay.newInstance(LocalDate.now());
+		EventDay day2 = EventDay.newInstance(LocalDate.of(2011, Month.APRIL, 23));
+
+		int actual = EventDay.sortByDay(day1, day2);
+		int expected = 7;
+
+		assertEquals("[sortByDay] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testSortByDay_WithSameDates() {
+		LocalDate now = LocalDate.now();
+		EventDay day1 = EventDay.newInstance(now);
+		EventDay day2 = EventDay.newInstance(now);
+
+		int actual = EventDay.sortByDay(day1, day2);
+		int expected = 0;
+
+		assertEquals("[sortByDay] not correct!", expected, actual);
+	}
+
+	@Test
 	public void testToString() {
 		LocalDate dateOfEvent = getDefinedLocalDateInThePast();
 		EventDay sut = EventDay.newInstance(dateOfEvent);

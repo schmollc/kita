@@ -41,11 +41,11 @@ public class TournamentEventTest {
 	public void testNewValidInstance() {
 
 		Eventname actualName = sut.getName();
-		EventDay actualEventDay = sut.getEventDay();
+		EventDay actualDay = sut.getDay();
 
 		assertNotNull("[uuid] not correct!", sut.getUuid());
 		assertEquals("[name] not correct!", eventName, actualName);
-		assertEquals("[eventDay] not correct!", eventDay, actualEventDay);
+		assertEquals("[eventDay] not correct!", eventDay, actualDay);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class TournamentEventTest {
 
 		assertNotNull("[uuid] not correct!", sutEmpty.getUuid());
 		assertNotNull("[name] not correct!", sutEmpty.getName());
-		assertNotNull("[eventDay] not correct!", sutEmpty.getEventDay());
+		assertNotNull("[eventDay] not correct!", sutEmpty.getDay());
 	}
 
 	@Test
@@ -69,12 +69,12 @@ public class TournamentEventTest {
 	}
 
 	@Test
-	public void testEventDay() {
+	public void testDay() {
 		EventDay expected = EventDay.newInstance(LocalDate.now());
 
-		sut.setEventDay(expected);
+		sut.setDay(expected);
 
-		EventDay actual = sut.getEventDay();
+		EventDay actual = sut.getDay();
 
 		assertEquals("[eventDay] not correct!", expected, actual);
 	}

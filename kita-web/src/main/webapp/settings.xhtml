@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<link
+		rel="stylesheet"
+		href="./styles/relayd.css"></link>
+	<link
+		rel="icon"
+		href="http://relayd.de:8080/relayD-web/favicon.ico" />
+</h:head>
+<h:body>
+
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+		<p />
+
+		<p:panel
+			id="panel"
+			header="Settings"
+			style="margin-bottom:10px;">
+			<h:panelGrid
+				columns="3"
+				id="inputgrid"
+				cellpadding="5">
+
+				<p:outputLabel value="Theme: " />
+				<p:themeSwitcher
+					style="width:150px"
+					effect="fade">
+					<f:selectItem
+						itemLabel="Choose Theme"
+						itemValue="" />
+					<f:selectItems value="#{settingsPageBean.themes}" />
+					<p:ajax
+						global="false"
+						listener="#{settingsPageBean.saveTheme}" />
+				</p:themeSwitcher>
+				<p:outputLabel value="" />
+
+				<p:outputLabel
+					for="gatewayType"
+					value="Gateway Type:" />
+				<p:selectOneMenu
+					id="gatewayType"
+					value="#{settingsPageBean.gatewayType}"
+					var="entry"
+					style="width:150px">
+					<f:selectItems
+						value="#{selectItemBean.gatewayTypes}"
+						var="gateway"
+						itemValue="#{gateway}" />
+					<p:column>
+					#{entry}
+				</p:column>
+						<p:ajax
+						global="false"
+						listener="#{settingsPageBean.saveGatewayType}" />
+			
+				</p:selectOneMenu>
+				<p:outputLabel value="" />
+			
+			</h:panelGrid>
+		</p:panel>
+
+		<ui:include src="/dock.xhtml" />
+
+	</h:form>
+</h:body>
+</html>

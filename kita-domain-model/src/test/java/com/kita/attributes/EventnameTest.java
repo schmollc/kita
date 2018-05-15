@@ -133,6 +133,26 @@ public class EventnameTest {
 	}
 
 	@Test
+	public void testSortByName() {
+		Eventname name1 = Eventname.newInstance("Kicker Turnier");
+		Eventname name2 = Eventname.newInstance("Turnier Kicker");
+
+		int position = Eventname.sortByName(name1, name2);
+
+		assertEquals("[sortByName] not correct!", -9, position);
+	}
+
+	@Test
+	public void testSortByName_WithSameNames() {
+		Eventname name1 = Eventname.newInstance("Kicher Turnier");
+		Eventname name2 = Eventname.newInstance("Kicher Turnier");
+
+		int position = Eventname.sortByName(name1, name2);
+
+		assertEquals("[sortByName] not correct!", 0, position);
+	}
+
+	@Test
 	public void testToString() {
 		String expected = "MetroGroup Marathon Düsseldorf";
 

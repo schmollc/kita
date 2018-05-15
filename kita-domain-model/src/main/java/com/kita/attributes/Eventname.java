@@ -35,6 +35,10 @@ public class Eventname implements Serializable {
 		return new Eventname(eventname);
 	}
 
+	public static int sortByName(Eventname name1, Eventname name2) {
+		return name1.getValue().compareToIgnoreCase(name2.getValue());
+	}
+
 	private String getValue() {
 		return value;
 	}

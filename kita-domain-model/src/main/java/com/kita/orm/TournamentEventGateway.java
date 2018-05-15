@@ -1,6 +1,7 @@
 package com.kita.orm;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.kita.TournamentEvent;
 
@@ -12,5 +13,7 @@ public interface TournamentEventGateway {
 	List<TournamentEvent> getAll();
 
 	void set(TournamentEvent relayEvent);
+
+	TournamentEvent get(UUID anUuid);
 
 }

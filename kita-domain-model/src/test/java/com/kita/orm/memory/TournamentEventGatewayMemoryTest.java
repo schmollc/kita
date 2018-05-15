@@ -11,7 +11,7 @@ import com.kita.orm.TournamentEventGatewayTest;
  * Wenn du den Feind und dich kennst, brauchst du den Ausgang von hundert Tests nicht zu fürchten.
  *  - Sunzi (Sun Tzu)
  *
- * @since   31.05.2016
+ * @since   14.05.2018
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
