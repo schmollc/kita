@@ -35,9 +35,9 @@ public class SettingsTest {
 	public void testGatewayType() {
 		GatewayType defaultValue = Settings.getGatewayType();
 
-		assertEquals("Default GatewayType not correct!", GatewayType.FILE, defaultValue);
+		assertEquals("Default GatewayType not correct!", GatewayType.MEMORY, defaultValue);
 
-		GatewayType expected = GatewayType.MEMORY;
+		GatewayType expected = GatewayType.FILE;
 
 		Settings.setGatewayType(expected);
 
@@ -45,4 +45,25 @@ public class SettingsTest {
 
 		assertEquals("[gatewayType] nicht korrekt!", expected, actual);
 	}
+
+	@Test
+	public void testTheme_ForInitialSut() {
+		String expected = "afterwork";
+
+		String actual = sut.getTheme();
+
+		assertEquals("[getTheme] for initial state not correct!", expected, actual);
+	}
+
+	@Test
+	public void testTheme() {
+		String expected = "le-Frog";
+
+		sut.setTheme(expected);
+
+		String actual = sut.getTheme();
+
+		assertEquals("[getTheme] not correct!", expected, actual);
+	}
+
 }

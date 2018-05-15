@@ -11,7 +11,9 @@ import com.kita.orm.GatewayType;
 public class Settings implements Serializable {
 	private static final long serialVersionUID = 6060470764587750857L;
 
-	private static GatewayType gatewayType = GatewayType.FILE;
+	private static GatewayType gatewayType = GatewayType.MEMORY;
+
+	private String theme = "afterwork";
 
 	private Settings() {
 		super();
@@ -28,4 +30,13 @@ public class Settings implements Serializable {
 	public static void setGatewayType(GatewayType aGatewayType) {
 		gatewayType = aGatewayType;
 	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String aTheme) {
+		theme = aTheme;
+	}
+
 }
