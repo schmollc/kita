@@ -46,7 +46,7 @@ public class TournamentEventEditPageBean implements Serializable {
 		return getBridge().get(uuid);
 	}
 
-	public void openDialogForCreateRelayEvent() {
+	public void openDialogForCreateTournamentEvent() {
 		prepareNewTournamentEvent();
 		openDialog();
 	}
@@ -69,7 +69,7 @@ public class TournamentEventEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		persistRelayEvent();
+		persistTournamentEvent();
 		closeDialog();
 	}
 
@@ -98,7 +98,7 @@ public class TournamentEventEditPageBean implements Serializable {
 		workingTournamentEvent.setName(anEventname);
 	}
 
-	void persistRelayEvent() {
+	void persistTournamentEvent() {
 		getBridge().set(workingTournamentEvent);
 	}
 

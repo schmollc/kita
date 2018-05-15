@@ -18,7 +18,6 @@ import org.primefaces.event.SelectEvent;
 import com.kita.TournamentEvent;
 import com.kita.web.bridge.TournamentEventBridge;
 import com.kita.web.bridge.TournamentEventBridgeImpl;
-import com.kita.web.local.I18N;
 
 /**
  * @since 13.05.2018
@@ -76,28 +75,21 @@ public class TournamentEventBrowsePageBean implements Serializable {
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		getTournamentEventEditPageBean().openDialogForCreateRelayEvent();
+		getTournamentEventEditPageBean().openDialogForCreateTournamentEvent();
 	}
 
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
+		TournamentEvent selectedEvent = getSelectedTournamentEvent();
+		getTournamentEventEditPageBean().openDialogFor(selectedEvent.getUuid());
+
 	}
 
-	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
+	public void onEditClosed(@SuppressWarnings("unused") SelectEvent selectEvent) {
 		refreshTournamentEvents();
 	}
 
 	private void refreshTournamentEvents() {
 		searchResult = getTournamentEventBridge().all();
-
-		//		EventDay eventDayFirstEvent = EventDay.newInstance(LocalDate.of(2018, Month.JANUARY, 31));
-		//		Eventname eventnameFirstEvent = Eventname.newInstance("1. Kicker Turnier");
-		//		searchResult.add(TournamentEvent.newInstance(eventnameFirstEvent, eventDayFirstEvent));
-		//
-		//		EventDay eventDaySecondEvent = EventDay.newInstance(LocalDate.of(2018, Month.APRIL, 16));
-		//		Eventname eventnameSecondEvent = Eventname.newInstance("2. Kicker Turnier");
-		//		searchResult.add(TournamentEvent.newInstance(eventnameSecondEvent, eventDaySecondEvent));
-
 	}
 
 	public void cancelEditDialog() {
