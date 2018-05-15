@@ -68,25 +68,25 @@ public class TournamentEventEditPageBeanTest {
 	}
 
 	@Test
-	public void testEventDay() {
+	public void testDay() {
 		sut.openDialogForCreateTournamentEvent();
 		EventDay expected = EventDay.today();
 
-		sut.setEventDay(expected);
+		sut.setDay(expected);
 
-		EventDay result = sut.getEventDay();
-		assertEquals("[EventDay] not correct!", expected, result);
+		EventDay result = sut.getDay();
+		assertEquals("[day] not correct!", expected, result);
 	}
 
 	@Test
-	public void testEventname() {
+	public void testName() {
 		sut.openDialogForCreateTournamentEvent();
 		Eventname expected = Eventname.newInstance();
 
-		sut.setEventname(expected);
+		sut.setName(expected);
 
-		Eventname result = sut.getEventname();
-		assertEquals("[Eventname] not correct!", expected, result);
+		Eventname result = sut.getName();
+		assertEquals("[name] not correct!", expected, result);
 	}
 
 	@Test

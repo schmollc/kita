@@ -82,19 +82,19 @@ public class TournamentEventEditPageBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	public EventDay getEventDay() {
-		return workingTournamentEvent.getEventDay();
+	public EventDay getDay() {
+		return workingTournamentEvent.getDay();
 	}
 
-	public void setEventDay(EventDay aEventDay) {
-		workingTournamentEvent.setEventDay(aEventDay);
+	public void setDay(EventDay aDay) {
+		workingTournamentEvent.setDay(aDay);
 	}
 
-	public Eventname getEventname() {
+	public Eventname getName() {
 		return workingTournamentEvent.getName();
 	}
 
-	public void setEventname(Eventname anEventname) {
+	public void setName(Eventname anEventname) {
 		workingTournamentEvent.setName(anEventname);
 	}
 

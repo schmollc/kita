@@ -35,7 +35,7 @@ public class TournamentEventToTournamentEventMapperTest {
 	}
 
 	@Test
-	public void testmapTournamentEventToTournamentEvent_ForSourceIsNull() {
+	public void testmapTournamentEventToTournamentEvent_WithSourceIsNull() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[source] must not be 'null'!");
 
@@ -43,7 +43,7 @@ public class TournamentEventToTournamentEventMapperTest {
 	}
 
 	@Test
-	public void testmapTournamentEventToTournamentEvent_ForTargetIsNull() {
+	public void testmapTournamentEventToTournamentEvent_WithTargetIsNull() {
 		expectedException.expect(IllegalArgumentException.class);
 		expectedException.expectMessage("[target] must not be 'null'!");
 
@@ -51,18 +51,18 @@ public class TournamentEventToTournamentEventMapperTest {
 	}
 
 	@Test
-	public void testmapTournamentEventToTournamentEvent_ForEventDay() {
+	public void testmapTournamentEventToTournamentEvent_WithDay() {
 		EventDay expected = EventDay.today();
-		source.setEventDay(expected);
+		source.setDay(expected);
 
 		sut.mapTournamentEventToTournamentEvent(source, target);
 
-		EventDay actual = target.getEventDay();
-		assertEquals("Mapping of [eventDay] is not correct!", expected, actual);
+		EventDay actual = target.getDay();
+		assertEquals("Mapping of [day] is not correct!", expected, actual);
 	}
 
 	@Test
-	public void testmapTournamentEventToTournamentEvent_ForName() {
+	public void testmapTournamentEventToTournamentEvent_WithName() {
 		Eventname expected = Eventname.newInstance("Rund um Ennepetal");
 		source.setName(expected);
 

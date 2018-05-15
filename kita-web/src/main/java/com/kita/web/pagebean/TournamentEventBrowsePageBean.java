@@ -16,6 +16,8 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.SelectEvent;
 
 import com.kita.TournamentEvent;
+import com.kita.attributes.EventDay;
+import com.kita.attributes.Eventname;
 import com.kita.web.bridge.TournamentEventBridge;
 import com.kita.web.bridge.TournamentEventBridgeImpl;
 
@@ -101,4 +103,13 @@ public class TournamentEventBrowsePageBean implements Serializable {
 		FacesMessage message = new FacesMessage(severity, summary, textMessage);
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
+
+	public int sortByDay(EventDay day1, EventDay day2) {
+		return EventDay.sortByDay(day1, day2);
+	}
+
+	public int sortByName(Eventname name1, Eventname name2) {
+		return Eventname.sortByName(name1, name2);
+	}
+
 }

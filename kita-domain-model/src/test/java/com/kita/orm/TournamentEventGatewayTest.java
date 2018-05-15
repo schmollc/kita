@@ -51,7 +51,7 @@ public abstract class TournamentEventGatewayTest {
 		TournamentEvent actualTournamentEvent = actualTournamentEventList.get(0);
 
 		assertEquals("[name] not correct!", expectedEventname, actualTournamentEvent.getName());
-		assertEquals("[eventDay] not correct!", expectedEventDay, actualTournamentEvent.getEventDay());
+		assertEquals("[day] not correct!", expectedEventDay, actualTournamentEvent.getDay());
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public abstract class TournamentEventGatewayTest {
 		TournamentEvent actualTournamentEventRundUmEnnepetal = actualTournamentEventList.get(0);
 
 		assertEquals("[name] not correct!", expectedEventname, actualTournamentEventRundUmEnnepetal.getName());
-		assertEquals("[eventDay] not correct!", expectedEventDay, actualTournamentEventRundUmEnnepetal.getEventDay());
+		assertEquals("[day] not correct!", expectedEventDay, actualTournamentEventRundUmEnnepetal.getDay());
 	}
 
 	@Test

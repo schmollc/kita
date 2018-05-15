@@ -25,20 +25,20 @@
 			id="inputgrid"
 			cellpadding="5">
 			<p:outputLabel
-				for="eventDay"
+				for="day"
 				value="Event Day(yyyy-MM-dd):" />
 			<p:inputText
-				id="eventDay"
-				value="#{tournamentEventEditPageBean.eventDay}"
+				id="day"
+				value="#{tournamentEventEditPageBean.day}"
 				style="width:280px">
 				<f:converter converterId="com.kita.web.converter.EventDayValueObjectConverter" />
 			</p:inputText>
 			<p:outputLabel
-				for="eventname"
+				for="name"
 				value="Eventname:" />
 			<p:inputText
-				id="eventname"
-				value="#{tournamentEventEditPageBean.eventname}"
+				id="name"
+				value="#{tournamentEventEditPageBean.name}"
 				style="width:280px">
 				<f:converter converterId="com.kita.web.converter.EventNameValueObjectConverter" />
 			</p:inputText>

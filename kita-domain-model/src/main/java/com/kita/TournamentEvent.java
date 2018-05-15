@@ -7,8 +7,7 @@ import com.kita.attributes.EventDay;
 import com.kita.attributes.Eventname;
 
 /**
- * @author schmollc
- * @since 08.03.2018
+ * @since 13.05.2018
  *
  */
 public class TournamentEvent implements Serializable {
@@ -16,16 +15,16 @@ public class TournamentEvent implements Serializable {
 
 	private UUID uuid;
 	private Eventname name = Eventname.newInstance();
-	private EventDay eventDay = EventDay.today();
+	private EventDay day = EventDay.today();
 
 	private TournamentEvent() {
 		uuid = UUID.randomUUID();
 	}
 
-	private TournamentEvent(Eventname anEventName, EventDay anEventDay) {
+	private TournamentEvent(Eventname aName, EventDay aDay) {
 		uuid = UUID.randomUUID();
-		name = anEventName;
-		eventDay = anEventDay;
+		name = aName;
+		day = aDay;
 	}
 
 	public static TournamentEvent newInstance() {
@@ -55,12 +54,12 @@ public class TournamentEvent implements Serializable {
 		name = eventName;
 	}
 
-	public EventDay getEventDay() {
-		return eventDay;
+	public EventDay getDay() {
+		return day;
 	}
 
-	public void setEventDay(EventDay day) {
-		eventDay = day;
+	public void setDay(EventDay aDay) {
+		day = aDay;
 	}
 
 	@Override
@@ -95,6 +94,6 @@ public class TournamentEvent implements Serializable {
 
 	@Override
 	public String toString() {
-		return name + ", " + eventDay;
+		return name + ", " + day;
 	}
 }

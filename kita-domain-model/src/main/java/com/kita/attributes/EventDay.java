@@ -40,6 +40,10 @@ public class EventDay implements Serializable {
 		return new EventDay(dateOfEvent);
 	}
 
+	public static int sortByDay(EventDay day1, EventDay day2) {
+		return day1.getValue().compareTo(day2.getValue());
+	}
+
 	public LocalDate getValue() {
 		return value;
 	}
