@@ -24,24 +24,40 @@
 			columns="2"
 			id="inputgrid"
 			cellpadding="5">
-			<p:outputLabel
-				for="day"
-				value="Event Day(yyyy-MM-dd):" />
-			<p:inputText
-				id="day"
-				value="#{tournamentEventEditPageBean.day}"
-				style="width:280px">
-				<f:converter converterId="com.kita.web.converter.EventDayValueObjectConverter" />
-			</p:inputText>
+			
 			<p:outputLabel
 				for="name"
 				value="Eventname:" />
 			<p:inputText
 				id="name"
 				value="#{tournamentEventEditPageBean.name}"
-				style="width:280px">
+				style="width:260px">
 				<f:converter converterId="com.kita.web.converter.EventNameValueObjectConverter" />
 			</p:inputText>
+
+		    <p:outputLabel for="button" value="Event Day:" />
+ 		    <p:calendar 
+ 		    	id="button" 
+ 		    	value="#{tournamentEventEditPageBean.day}" 
+ 		    	pattern="yyyy-MM-dd" 
+ 		    	mask="true"
+ 		    	showOn="button" 
+ 		    	size="6">
+ 		    	<f:converter converterId="com.kita.web.converter.EventDayValueObjectConverter" />
+ 		    </p:calendar>
+
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+		    <p:outputLabel value=" " />
+ 
 		</h:panelGrid>
 
 		<p:commandButton
