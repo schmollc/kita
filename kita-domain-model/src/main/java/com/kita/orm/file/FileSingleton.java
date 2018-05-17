@@ -94,4 +94,10 @@ public class FileSingleton {
 		bigData.setTournamentEvents(someTournamentEvents);
 		set(bigData);
 	}
+
+	public void reset() {
+		File file = new File(getFileName());
+		file.delete();
+		initFile();
+	}
 }
