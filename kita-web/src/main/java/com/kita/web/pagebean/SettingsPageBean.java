@@ -31,7 +31,7 @@ public class SettingsPageBean implements Serializable {
 	private List<Theme> themes;
 
 	@ManagedProperty("#{themeService}")
-	ThemeService service;
+	private ThemeService service;
 
 	@PostConstruct
 	public void init() {
