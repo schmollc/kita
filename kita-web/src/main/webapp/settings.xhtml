@@ -68,6 +68,15 @@
 			
 				</p:selectOneMenu>
 				<p:outputLabel value="" />
+
+				<p:outputLabel
+					value="Reset File:" />
+				<p:commandButton
+					actionListener="#{settingsPageBean.resetFile}"
+					icon="ui-icon-check"
+					style="float:right;">
+				</p:commandButton>
+				<p:outputLabel value="" />
 			
 			</h:panelGrid>
 		</p:panel>

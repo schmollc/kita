@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
 
 import org.primefaces.component.selectonemenu.SelectOneMenu;
@@ -14,6 +15,8 @@ import org.primefaces.component.themeswitcher.ThemeSwitcher;
 
 import com.kita.orm.GatewayType;
 import com.kita.web.bridge.Settings;
+import com.kita.web.bridge.SettingsBridge;
+import com.kita.web.bridge.SettingsBridgeImpl;
 import com.kita.web.theme.Theme;
 import com.kita.web.theme.ThemeService;
 
@@ -26,7 +29,8 @@ import com.kita.web.theme.ThemeService;
 public class SettingsPageBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	Settings settings = Settings.newInstance();
+	private Settings settings = Settings.newInstance();
+	private SettingsBridge settingsBridge;
 
 	private List<Theme> themes;
 
@@ -36,6 +40,11 @@ public class SettingsPageBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		themes = service.getThemes();
+		settingsBridge = new SettingsBridgeImpl();
+	}
+
+	public SettingsBridge getSettingsBridge() {
+		return settingsBridge;
 	}
 
 	public List<Theme> getThemes() {
@@ -70,5 +79,9 @@ public class SettingsPageBean implements Serializable {
 		SelectOneMenu selectOneMenu = (SelectOneMenu) ajax.getSource();
 		GatewayType selectedGatewayType = (GatewayType) selectOneMenu.getValue();
 		Settings.setGatewayType(selectedGatewayType);
+	}
+
+	public void resetFile(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		getSettingsBridge().resetFile();
 	}
 }
