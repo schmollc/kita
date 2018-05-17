@@ -15,7 +15,7 @@ import com.kita.orm.GatewayType;
  * Keep your tests clean.
  *  - Robert C. Martin
  *
- * @author schmollc (Christian@relayd.de)
+ * @since 14.05.2018
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -35,7 +35,6 @@ public class TournamentEventBridgeImplTest {
 	public void testGatewayType() {
 		GatewayType result = sut.getGatewayType();
 
-		assertEquals("[gatewayType] not correct!", GatewayType.FILE, result);
+		assertEquals("[gatewayType] not correct!", GatewayType.MEMORY, result);
 	}
-
 }

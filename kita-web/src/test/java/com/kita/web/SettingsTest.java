@@ -48,7 +48,7 @@ public class SettingsTest {
 
 	@Test
 	public void testTheme_ForInitialSut() {
-		String expected = "afterwork";
+		String expected = "afterdark";
 
 		String actual = sut.getTheme();
 

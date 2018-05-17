@@ -7,7 +7,6 @@ import java.io.Serializable;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-import org.mockito.Spy;
 
 /**
  * Tests are the Programmer’s stone, transmuting fear into boredom.
@@ -19,8 +18,7 @@ import org.mockito.Spy;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TournamentEventBrowsePageBeanTest {
 
-	@Spy
-	private TournamentEventBrowsePageBean sut;
+	private TournamentEventBrowsePageBean sut = new TournamentEventBrowsePageBean();
 
 	@Test
 	public void testIsSerializable() {
