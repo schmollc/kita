@@ -1,5 +1,7 @@
 package com.kita;
 
+import java.util.UUID;
+
 import com.kita.attributes.Forename;
 import com.kita.attributes.Surename;
 
@@ -9,8 +11,9 @@ import com.kita.attributes.Surename;
  */
 public class Person {
 
-	private Forename forename;
-	private Surename surename;
+	private Surename surename = Surename.newInstance();
+	private Forename forename = Forename.newInstance();
+	private UUID uuid;
 
 	private Person() {
 
@@ -20,19 +23,35 @@ public class Person {
 		return new Person();
 	}
 
-	public void setForename(Forename aForename) {
-		forename = aForename;
+	public void setUuid(UUID anUuid) {
+		uuid = anUuid;
 	}
 
-	private Forename getForename() {
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setForename(Forename aForename) {
+		if (aForename == null) {
+			forename = Forename.newInstance();
+		} else {
+			forename = aForename;
+		}
+	}
+
+	public Forename getForename() {
 		return forename;
 	}
 
 	public void setSurename(Surename aSurename) {
-		surename = aSurename;
+		if (aSurename == null) {
+			surename = Surename.newInstance();
+		} else {
+			surename = aSurename;
+		}
 	}
 
-	private Surename getSurename() {
+	public Surename getSurename() {
 		return surename;
 	}
 
