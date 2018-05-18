@@ -13,10 +13,10 @@ public class PersonGatewayFactory {
 
 		switch (gatewayType) {
 			case MEMORY:
-				return new PersonGatewayMemory();
+				return PersonGatewayMemory.newInstance();
 
 			case FILE:
-				return new PersonGatewayFile();
+				return PersonGatewayFile.newInstance();
 
 			default:
 				throw new IllegalArgumentException("[" + gatewayType + "] is unsupported Gateway Type.");

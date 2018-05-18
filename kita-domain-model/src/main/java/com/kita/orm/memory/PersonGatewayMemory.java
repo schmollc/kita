@@ -1,4 +1,4 @@
-package com.kita.orm.file;
+package com.kita.orm.memory;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,7 +10,15 @@ import com.kita.orm.PersonGateway;
  * @since   18.05.2018
  *
  */
-public class PersonGatewayFile implements PersonGateway {
+public class PersonGatewayMemory implements PersonGateway {
+
+	private PersonGatewayMemory() {
+
+	}
+
+	public static PersonGateway newInstance() {
+		return new PersonGatewayMemory();
+	}
 
 	@Override
 	public List<Person> getAll() {
