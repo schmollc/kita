@@ -26,9 +26,9 @@ public class ForenameTest {
 		Forename sut = Forename.newInstance(dummyString);
 
 		@SuppressWarnings("cast")
-		boolean result = sut instanceof Serializable;
+		boolean condition = sut instanceof Serializable;
 
-		assertTrue("Class is not Serializable!", result);
+		assertTrue("Class is not Serializable!", condition);
 	}
 
 	@Test
@@ -37,9 +37,9 @@ public class ForenameTest {
 
 		assertNotNull("Not a valid instance!", sut);
 
-		boolean result = sut.getClass() == ForenameNullObject.class;
+		boolean condition = sut.getClass() == ForenameNullObject.class;
 
-		assertTrue("Instance is not correct!", result);
+		assertTrue("Instance is not correct!", condition);
 	}
 
 	@Test
@@ -48,8 +48,8 @@ public class ForenameTest {
 
 		assertNotNull(forename);
 
-		boolean result = forename.getClass() == Forename.class;
-		assertTrue("Instance not correct!", result);
+		boolean condition = forename.getClass() == Forename.class;
+		assertTrue("Instance not correct!", condition);
 		//Oder
 		String toString = forename.toString();
 		assertEquals("Forename", toString);
@@ -93,9 +93,10 @@ public class ForenameTest {
 		Forename name1 = Forename.newInstance("Justus");
 		Forename name2 = Forename.newInstance("Peter");
 
-		int position = Forename.sortByForename(name1, name2);
+		int actual = Forename.sortByForename(name1, name2);
 
-		assertEquals("[position] not correct!", -6, position);
+		int expected = -6;
+		assertEquals("[position] not correct!", expected, actual);
 	}
 
 	@Test
@@ -103,19 +104,20 @@ public class ForenameTest {
 		Forename name1 = Forename.newInstance("Justus");
 		Forename name2 = Forename.newInstance("justus");
 
-		int position = Forename.sortByForename(name1, name2);
+		int actual = Forename.sortByForename(name1, name2);
 
-		assertEquals("[position] not correct!", 0, position);
+		int expected = 0;
+		assertEquals("[position] not correct!", expected, actual);
 	}
 
 	@Test
 	public void testToString() {
-		String expectedResult = "Marty";
-		Forename sut = Forename.newInstance(expectedResult);
+		String expectedcondition = "Marty";
+		Forename sut = Forename.newInstance(expectedcondition);
 
-		String actualResult = sut.toString();
+		String actualcondition = sut.toString();
 
-		assertEquals("String representation is not correct!", expectedResult, actualResult);
+		assertEquals("String representation is not correct!", expectedcondition, actualcondition);
 	}
 
 	@Test
@@ -158,9 +160,9 @@ public class ForenameTest {
 	public void testIsEmpty_ForValueEmpty() {
 		Forename sut = Forename.newInstance("");
 
-		boolean result = sut.isEmpty();
+		boolean condition = sut.isEmpty();
 
-		assertTrue("[result] for isEmpty is not correct!", result);
+		assertTrue("[condition] for isEmpty is not correct!", condition);
 	}
 
 	@Test
@@ -168,27 +170,27 @@ public class ForenameTest {
 		String comment = "Justus";
 		Forename sut = Forename.newInstance(comment);
 
-		boolean result = sut.isEmpty();
+		boolean condition = sut.isEmpty();
 
-		assertFalse("[result] for isEmpty is not correct!", result);
+		assertFalse("[condition] for isEmpty is not correct!", condition);
 	}
 
 	@Test
 	public void testIsEmpty_ForValueFilledWithBlank() {
 		Forename sut = Forename.newInstance("    ");
 
-		boolean result = sut.isEmpty();
+		boolean condition = sut.isEmpty();
 
-		assertTrue("[result] for isEmpty is not correct!", result);
+		assertTrue("[condition] for isEmpty is not correct!", condition);
 	}
 
 	@Test
 	public void testIsEmpty_ForValueNull() {
 		Forename sut = Forename.newInstance(null);
 
-		boolean result = sut.isEmpty();
+		boolean condition = sut.isEmpty();
 
-		assertTrue("[result] for isEmpty is not correct!", result);
+		assertTrue("[condition] for isEmpty is not correct!", condition);
 	}
 
 	@Test
@@ -210,27 +212,28 @@ public class ForenameTest {
 	public void testEquals_WithMyself() {
 		Forename sut = Forename.newInstance("Name");
 
-		boolean result = sut.equals(sut);
+		boolean condition = sut.equals(sut);
 
-		assertTrue(result);
+		assertTrue(condition);
 	}
 
 	@Test
 	public void testEquals_WithNull() {
 		Forename sut = Forename.newInstance("Name");
 
-		boolean result = sut.equals(null);
+		boolean condition = sut.equals(null);
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
 	public void testEquals_WithNotCompatibleClass() {
 		Forename sut = Forename.newInstance("Name");
 
-		boolean result = sut.equals(new String());
+		@SuppressWarnings("unlikely-arg-type")
+		boolean condition = sut.equals(new String());
 
-		assertFalse(result);
+		assertFalse(condition);
 	}
 
 	@Test
@@ -239,9 +242,9 @@ public class ForenameTest {
 
 		Forename secondSut = Forename.newInstance("Name2");
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertFalse(result);
+		assertFalse(condition);
 
 	}
 
@@ -251,9 +254,9 @@ public class ForenameTest {
 
 		Forename secondSut = Forename.newInstance("Name");
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertTrue(result);
+		assertTrue(condition);
 	}
 
 	@Test
@@ -263,9 +266,9 @@ public class ForenameTest {
 
 		Forename secondSut = Forename.newInstance("dummy");
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertFalse(result);
+		assertFalse(condition);
 
 	}
 
@@ -277,8 +280,8 @@ public class ForenameTest {
 		Forename secondSut = Forename.newInstance("dummy");
 		secondSut.value = null;
 
-		boolean result = sut.equals(secondSut);
+		boolean condition = sut.equals(secondSut);
 
-		assertTrue(result);
+		assertTrue(condition);
 	}
 }
