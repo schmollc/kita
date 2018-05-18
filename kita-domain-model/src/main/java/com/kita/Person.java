@@ -1,6 +1,7 @@
 package com.kita;
 
 import com.kita.attributes.Forename;
+import com.kita.attributes.Surename;
 
 /**
  * @since   18.05.2018
@@ -9,6 +10,7 @@ import com.kita.attributes.Forename;
 public class Person {
 
 	private Forename forename;
+	private Surename surename;
 
 	private Person() {
 
@@ -26,8 +28,16 @@ public class Person {
 		return forename;
 	}
 
+	public void setSurename(Surename aSurename) {
+		surename = aSurename;
+	}
+
+	private Surename getSurename() {
+		return surename;
+	}
+
 	@Override
 	public String toString() {
-		return "" + getForename();
+		return getForename() + " " + getSurename();
 	}
 }

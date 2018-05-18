@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.kita.attributes.Forename;
+import com.kita.attributes.Surename;
 
 /**
  * Discipline is the best tool.
@@ -21,13 +22,13 @@ public class PersonTest {
 	@Test
 	public void testToString() {
 		Person sut = Person.newInstance();
-		//		sut.setSurename(Surename.newInstance("Jonas"));
-		String expected = "Justus";
-		sut.setForename(Forename.newInstance(expected));
+
+		sut.setForename(Forename.newInstance("Justus"));
+		sut.setSurename(Surename.newInstance("Jonas"));
 
 		String actual = sut.toString();
 
+		String expected = "Justus Jonas";
 		assertEquals("[toString] not correct!", expected, actual);
 	}
-
 }
