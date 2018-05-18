@@ -57,24 +57,17 @@ public class FileSingleton {
 	}
 
 	private void set(BigData aBigData) {
-		try {
-			FileOutputStream fileOutputStream;
-			fileOutputStream = new FileOutputStream(getFileName());
+		try (FileOutputStream fileOutputStream = new FileOutputStream(getFileName())) {
 			SerializationUtils.serialize(aBigData, fileOutputStream);
-			fileOutputStream.close();
 		} catch (IOException e) {
 			throw new RuntimeException("Error - IOException ", e);
 		}
-
 	}
 
 	private BigData getBigData() {
-		FileInputStream fileInputStream;
 		BigData bigData;
-		try {
-			fileInputStream = new FileInputStream(getFileName());
-			bigData = (BigData) SerializationUtils.deserialize(fileInputStream);
-			fileInputStream.close();
+		try (FileInputStream fileInputStream = new FileInputStream(getFileName())) {
+			bigData = SerializationUtils.deserialize(fileInputStream);
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException("Error - FileNotFoundException", e);
 		} catch (IOException e) {
