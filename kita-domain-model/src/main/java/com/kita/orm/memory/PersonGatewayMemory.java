@@ -1,5 +1,6 @@
 package com.kita.orm.memory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,20 +22,23 @@ public class PersonGatewayMemory implements PersonGateway {
 	}
 
 	@Override
+	public Person get(UUID uuid) {
+		return MemorySingleton.getInstance().getPersons().get(uuid);
+	}
+
+	@Override
+	public void set(Person person) {
+		MemorySingleton.getInstance().getPersons().put(person.getUuid(), person);
+	}
+
+	@Override
+	public void remove(UUID uuid) {
+		MemorySingleton.getInstance().getPersons().remove(uuid);
+	}
+
+	@Override
 	public List<Person> getAll() {
-		return null;
-	}
-
-	@Override
-	public Person get(UUID aUuid) {
-		return null;
-	}
-
-	@Override
-	public void set(Person aPerson) {
-	}
-
-	@Override
-	public void remove(UUID aUuid) {
+		ArrayList<Person> personsAsList = new ArrayList<Person>(MemorySingleton.getInstance().getPersons().values());
+		return personsAsList;
 	}
 }

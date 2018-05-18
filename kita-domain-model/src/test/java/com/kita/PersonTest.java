@@ -2,6 +2,7 @@ package com.kita;
 
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -20,6 +21,26 @@ import com.kita.attributes.Surename;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PersonTest {
+
+	@Test
+	public void testIsSerializable() {
+		String dummyString = "";
+		Surename sut = Surename.newInstance(dummyString);
+
+		@SuppressWarnings("cast")
+		boolean condition = sut instanceof Serializable;
+		assertTrue("Class not Serializable!", condition);
+	}
+
+	@Test
+	public void testNewInstance() {
+		Person sut = Person.newInstance();
+
+		assertNotNull("Not a valid instance!", sut);
+
+		Object object = sut.getUuid();
+		assertNotNull("[uuid] is not correct!", object);
+	}
 
 	@Test
 	public void testUUID() {
@@ -85,6 +106,93 @@ public class PersonTest {
 
 		Surename actual = sut.getSurename();
 		assertNotNull("Person must not return [surename] equals 'null'!", actual);
+	}
+
+	@Test
+	public void testHashCode() {
+		Person sut = Person.newInstance();
+		sut.setUuid(UUID.fromString("2697d710-8967-4b2d-9ab2-8fc50ddc6138"));
+
+		int hashCode = sut.hashCode();
+
+		assertEquals(949908191, hashCode);
+
+		sut.setUuid(null);
+
+		hashCode = sut.hashCode();
+
+		assertEquals(31, hashCode);
+	}
+
+	@Test
+	public void testEqualsWithMyself() {
+		Person sut = Person.newInstance();
+
+		boolean actual = sut.equals(sut);
+
+		assertTrue(actual);
+	}
+
+	@Test
+	public void testEqualsWithNull() {
+		Person sut = Person.newInstance();
+
+		boolean actual = sut.equals(null);
+
+		assertFalse(actual);
+	}
+
+	@Test
+	public void testEqualsWithNotCompatibleClass() {
+		Person sut = Person.newInstance();
+
+		boolean actual = sut.equals(new String());
+
+		assertFalse(actual);
+	}
+
+	@Test
+	public void testEqualsWithValueIsNull() {
+		Person sut = Person.newInstance();
+		sut.setUuid(null);
+		Person secondSut = Person.newInstance();
+
+		boolean actual = sut.equals(secondSut);
+
+		assertFalse(actual);
+	}
+
+	@Test
+	public void testEqualsWithBothValuesAreNull() {
+		Person sut = Person.newInstance();
+		sut.setUuid(null);
+		Person secondSut = Person.newInstance();
+		secondSut.setUuid(null);
+
+		boolean actual = sut.equals(secondSut);
+
+		assertTrue(actual);
+	}
+
+	@Test
+	public void testEqualsWithTwoDiffrentValues() {
+		Person sut = Person.newInstance();
+		Person secondSut = Person.newInstance();
+
+		boolean actual = sut.equals(secondSut);
+
+		assertFalse(actual);
+	}
+
+	@Test
+	public void testEqualsWithSameValues() {
+		Person sut = Person.newInstance();
+		Person secondSut = Person.newInstance();
+		sut.setUuid(secondSut.getUuid());
+
+		boolean actual = sut.equals(secondSut);
+
+		assertTrue(actual);
 	}
 
 }
