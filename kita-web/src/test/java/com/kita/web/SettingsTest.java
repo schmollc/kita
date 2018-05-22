@@ -44,6 +44,8 @@ public class SettingsTest {
 		GatewayType actual = Settings.getGatewayType();
 
 		assertEquals("[gatewayType] nicht korrekt!", expected, actual);
+
+		Settings.setGatewayType(GatewayType.MEMORY);
 	}
 
 	@Test
