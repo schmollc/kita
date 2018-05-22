@@ -45,6 +45,16 @@
 				<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
 			</p:inputText>
 
+			<p:outputLabel
+				for="kampfname"
+				value="Kampfname:" />
+			<p:inputText
+				id="kampfname"
+				value="#{personEditPageBean.kampfname}"
+				style="width:180px">
+				<f:converter converterId="com.relayd.web.converter.KampfnameValueObjectConverter" />
+			</p:inputText>
+
 		</h:panelGrid>
 
 		<p:commandButton

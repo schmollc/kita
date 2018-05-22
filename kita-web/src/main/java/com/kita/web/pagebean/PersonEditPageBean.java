@@ -11,6 +11,7 @@ import org.primefaces.context.RequestContext;
 
 import com.kita.Person;
 import com.kita.attributes.Forename;
+import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
 import com.kita.web.bridge.PersonBridge;
 import com.kita.web.bridge.PersonBridgeImpl;
@@ -96,6 +97,14 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setSurename(Surename aSurename) {
 		workingPerson.setSurename(aSurename);
+	}
+
+	public Kampfname getKampfname() {
+		return workingPerson.getKampfname();
+	}
+
+	public void setKampfname(Kampfname aKampfname) {
+		workingPerson.setKampfname(aKampfname);
 	}
 
 	private PersonBridge getBridge() {
