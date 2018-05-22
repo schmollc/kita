@@ -17,14 +17,38 @@
 			showDetail="true" />
 
 		<div class="divStartHeader"></div>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton
+					actionListener="#{personBrowsePageBean.add}"
+					icon="ui-icon-plus"
+					update="personTable">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<p:commandButton
+					update="form"
+					actionListener="#{personBrowsePageBean.edit}"
+					icon="ui-icon-pencil">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{personBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+
 		<p:dataTable
 			var="person"
 			widgetVar="personTable"
 			id="personTable"
-			selectionMode="multiple"
 			value="#{personBrowsePageBean.persons}"
 			scrollable="true"
 			scrollHeight="500"
+			selectionMode="multiple"
+			selection="#{personBrowsePageBean.selectedPersons}"
 			sortBy="#{person.surename.toString()}"
 			rowKey="#{person.uuid}"
 			resizableColumns="true">

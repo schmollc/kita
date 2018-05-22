@@ -3,15 +3,24 @@ package com.kita.web.pagebean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+
+import org.primefaces.event.SelectEvent;
 
 import com.kita.Person;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Surename;
 import com.kita.web.bridge.PersonBridge;
 import com.kita.web.bridge.PersonBridgeImpl;
+import com.kita.web.local.I18N;
 
 /**
  * @since 2.05.2018
@@ -24,6 +33,11 @@ public class PersonBrowsePageBean implements Serializable {
 
 	private PersonBridge personBridge = null;
 	private List<Person> searchResult = new ArrayList<>();
+
+	private List<Person> selectedPersons;
+
+	@ManagedProperty(value = "#{personEditPageBean}")
+	private PersonEditPageBean personEditPageBean;
 
 	public PersonBrowsePageBean() {
 		personBridge = new PersonBridgeImpl();
@@ -52,5 +66,55 @@ public class PersonBrowsePageBean implements Serializable {
 
 	public Integer getNumberOfResults() {
 		return searchResult == null ? 0 : searchResult.size();
+	}
+
+	public boolean isRowSelectedForOneRow() {
+		return getSelectedPersons() != null && getSelectedPersons().size() == 1;
+	}
+
+	public List<Person> getSelectedPersons() {
+		return selectedPersons;
+	}
+
+	public void setSelectedPersons(List<Person> someSelectedPersons) {
+		selectedPersons = someSelectedPersons;
+	}
+
+	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		getPersonEditPageBean().openDialogForCreatePerson();
+	}
+
+	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		if (isRowSelectedForOneRow()) {
+			UUID uuid = getSelectedPerson().getUuid();
+			getPersonEditPageBean().openDialogFor(uuid);
+		} else {
+			showMessageErrorNoRowSelected();
+		}
+	}
+
+	private Person getSelectedPerson() {
+		return selectedPersons.get(0);
+	}
+
+	public void onEditClosed(@SuppressWarnings("unused") SelectEvent selectEvent) {
+		refreshPersons();
+	}
+
+	public PersonEditPageBean getPersonEditPageBean() {
+		return personEditPageBean;
+	}
+
+	public void setPersonEditPageBean(PersonEditPageBean aPersonEditPageBean) {
+		personEditPageBean = aPersonEditPageBean;
+	}
+
+	void showMessageErrorNoRowSelected() {
+		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_ROW);
+	}
+
+	void showMessage(Severity severity, String summary, String textMessage) {
+		FacesMessage message = new FacesMessage(severity, summary, textMessage);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 }

@@ -17,4 +17,6 @@ public final class NavigationConstants implements Serializable {
 
 	public static final String TOURNAMENT_EVENT_EDIT_DIALOG_ID = "event/tournamentEventEditDialog";
 
+	public static final String PERSON_PERSON_DIALOG_ID = "personEditDialog";
+
 }
