@@ -1,7 +1,6 @@
 package com.kita.web.pagebean;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
 
@@ -34,8 +33,6 @@ public class TournamentEventEditPageBean implements Serializable {
 
 	TournamentEvent workingTournamentEvent = null;
 
-	private Date date2;
-	
 	public TournamentEventEditPageBean() {
 		tournamentEventBridge = new TournamentEventBridgeImpl();
 	}
@@ -115,13 +112,5 @@ public class TournamentEventEditPageBean implements Serializable {
 
 	private void refreshGui() {
 		workingTournamentEvent = getTournamentEvent(workingTournamentEvent.getUuid());
-	}
-
-	public Date getDate2() {
-		return date2;
-	}
-
-	public void setDate2(Date date2) {
-		this.date2 = date2;
 	}
 }
