@@ -47,7 +47,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().height(400).build();
+		Map<String, Object> options = new DialogOptionsBuilder().height(200).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PERSON_PERSON_DIALOG_ID, options, null);
 	}
 
