@@ -10,6 +10,7 @@ import org.junit.runners.MethodSorters;
 
 import com.kita.Person;
 import com.kita.attributes.Forename;
+import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
 
 /**
@@ -78,4 +79,16 @@ public class PersonToPersonMapperTest {
 		Forename actual = target.getForename();
 		assertEquals("Mapping of [forename] is not correct!", expected, actual);
 	}
+
+	@Test
+	public void testMapPersonToPerson_Kampfname() {
+		Kampfname expected = Kampfname.newInstance("Lokomotive C&A");
+		source.setKampfname(expected);
+
+		sut.mapPersonToPerson(source, target);
+
+		Kampfname actual = target.getKampfname();
+		assertEquals("Mapping of [kampfname] is not correct!", expected, actual);
+	}
+
 }

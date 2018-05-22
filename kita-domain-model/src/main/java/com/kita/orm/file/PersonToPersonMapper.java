@@ -25,5 +25,6 @@ public class PersonToPersonMapper {
 
 		target.setSurename(source.getSurename());
 		target.setForename(source.getForename());
+		target.setKampfname(source.getKampfname());
 	}
 }
