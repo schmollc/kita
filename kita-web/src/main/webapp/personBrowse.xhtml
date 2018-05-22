@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head/>
+<h:body>
+	<h:form id="form">
+
+		<p:growl
+			id="growl"
+			showDetail="true" />
+
+		<div class="divStartHeader"></div>
+		<p:dataTable
+			var="person"
+			widgetVar="personTable"
+			id="personTable"
+			selectionMode="multiple"
+			value="#{personBrowsePageBean.persons}"
+			scrollable="true"
+			scrollHeight="500"
+			sortBy="#{person.surename.toString()}"
+			rowKey="#{person.uuid}"
+			resizableColumns="true">
+			<f:facet name="header">
+	        	In total there are #{personBrowsePageBean.getNumberOfResults()} persons.
+				<p:outputPanel>
+					<h:outputText value="&nbsp;" />
+				</p:outputPanel>
+			</f:facet>
+
+			<p:column
+				visible="true"
+				toggleable="false"
+				style="width:16px">
+				<p:rowToggler />
+			</p:column>
+
+			<p:column
+				headerText="Forename"
+				filterBy="#{person.forename}"
+				sortBy="#{person.forename}"
+				sortFunction="#{personBrowsePageBean.sortByForename}"
+				width="140">
+				<h:outputText value="#{person.forename}" />
+			</p:column>
+
+			<p:column
+				headerText="Surename"
+				filterBy="#{person.surename}"
+				sortBy="#{person.surename}"
+				sortFunction="#{personBrowsePageBean.sortBySurename}"
+				width="140">
+				<h:outputText value="#{person.surename}" />
+			</p:column>
+		</p:dataTable>
+
+		<ui:include src="/dock.xhtml" />
+
+	</h:form>
+</h:body>
+</html>
