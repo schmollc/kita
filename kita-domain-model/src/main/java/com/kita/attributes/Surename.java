@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  */
 public class Surename implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3512936483855356335L;
 
 	String value;
 
