@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.kita.attributes.Forename;
+import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
 
 /**
@@ -24,8 +25,7 @@ public class PersonTest {
 
 	@Test
 	public void testIsSerializable() {
-		String dummyString = "";
-		Surename sut = Surename.newInstance(dummyString);
+		Person sut = Person.newInstance();
 
 		@SuppressWarnings("cast")
 		boolean condition = sut instanceof Serializable;
@@ -76,15 +76,27 @@ public class PersonTest {
 	}
 
 	@Test
+	public void testKampfname() {
+		Person sut = Person.newInstance();
+		Kampfname expected = Kampfname.newInstance("Lokomotive C&A");
+
+		sut.setKampfname(expected);
+
+		Kampfname actual = sut.getKampfname();
+		assertEquals("[kampfname] not correct!", expected, actual);
+	}
+
+	@Test
 	public void testToString() {
 		Person sut = Person.newInstance();
 
 		sut.setForename(Forename.newInstance("Justus"));
 		sut.setSurename(Surename.newInstance("Jonas"));
+		sut.setKampfname(Kampfname.newInstance("Lokomotive C&A"));
 
 		String actual = sut.toString();
 
-		String expected = "Justus Jonas";
+		String expected = "Justus Jonas - Lokomotive C&A";
 		assertEquals("[toString] not correct!", expected, actual);
 	}
 
@@ -106,6 +118,16 @@ public class PersonTest {
 
 		Surename actual = sut.getSurename();
 		assertNotNull("Person must not return [surename] equals 'null'!", actual);
+	}
+
+	@Test
+	public void testSetKampfname_ForNullValue() {
+		Person sut = Person.newInstance();
+
+		sut.setKampfname(null);
+
+		Kampfname actual = sut.getKampfname();
+		assertNotNull("Person must not return [kampfname] equals 'null'!", actual);
 	}
 
 	@Test

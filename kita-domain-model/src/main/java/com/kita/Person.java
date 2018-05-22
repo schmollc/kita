@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 import com.kita.attributes.Forename;
+import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
 
 /**
@@ -16,6 +17,8 @@ public class Person implements Serializable {
 	private Surename surename = Surename.newInstance();
 	private Forename forename = Forename.newInstance();
 	private UUID uuid;
+
+	private Kampfname kampfname;
 
 	private Person() {
 		uuid = UUID.randomUUID();
@@ -57,9 +60,21 @@ public class Person implements Serializable {
 		return surename;
 	}
 
+	public void setKampfname(Kampfname aKampfname) {
+		if (aKampfname == null) {
+			kampfname = Kampfname.newInstance();
+		} else {
+			kampfname = aKampfname;
+		}
+	}
+
+	public Kampfname getKampfname() {
+		return kampfname;
+	}
+
 	@Override
 	public String toString() {
-		return getForename() + " " + getSurename();
+		return getForename() + " " + getSurename() + " - " + getKampfname();
 	}
 
 	@Override
@@ -91,5 +106,4 @@ public class Person implements Serializable {
 		}
 		return true;
 	}
-
 }
