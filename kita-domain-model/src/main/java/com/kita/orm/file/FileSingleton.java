@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.SerializationUtils;
 
+import com.kita.Person;
 import com.kita.TournamentEvent;
 
 /**
@@ -57,24 +58,17 @@ public class FileSingleton {
 	}
 
 	private void set(BigData aBigData) {
-		try {
-			FileOutputStream fileOutputStream;
-			fileOutputStream = new FileOutputStream(getFileName());
+		try (FileOutputStream fileOutputStream = new FileOutputStream(getFileName())) {
 			SerializationUtils.serialize(aBigData, fileOutputStream);
-			fileOutputStream.close();
 		} catch (IOException e) {
 			throw new RuntimeException("Error - IOException ", e);
 		}
-
 	}
 
 	private BigData getBigData() {
-		FileInputStream fileInputStream;
 		BigData bigData;
-		try {
-			fileInputStream = new FileInputStream(getFileName());
-			bigData = (BigData) SerializationUtils.deserialize(fileInputStream);
-			fileInputStream.close();
+		try (FileInputStream fileInputStream = new FileInputStream(getFileName())) {
+			bigData = SerializationUtils.deserialize(fileInputStream);
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException("Error - FileNotFoundException", e);
 		} catch (IOException e) {
@@ -95,9 +89,22 @@ public class FileSingleton {
 		set(bigData);
 	}
 
+	public List<Person> getPersons() {
+		List<Person> personsAsList = new ArrayList<>();
+		personsAsList.addAll(getBigData().getPersons());
+		return personsAsList;
+	}
+
+	public void setPersons(List<Person> somePersons) {
+		BigData bigData = getBigData();
+		bigData.setPersons(somePersons);
+		set(bigData);
+	}
+
 	public void reset() {
 		File file = new File(getFileName());
 		file.delete();
 		initFile();
 	}
+
 }
