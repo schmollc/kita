@@ -9,6 +9,8 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
 /**
+ * Copy from the primefaces example.
+ *
  * @since 15.05.2018
  *
  */

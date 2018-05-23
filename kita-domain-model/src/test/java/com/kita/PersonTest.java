@@ -168,6 +168,7 @@ public class PersonTest {
 	public void testEqualsWithNotCompatibleClass() {
 		Person sut = Person.newInstance();
 
+		@SuppressWarnings("unlikely-arg-type")
 		boolean actual = sut.equals(new String());
 
 		assertFalse(actual);

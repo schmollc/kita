@@ -1,10 +1,15 @@
 package com.kita.web.theme;
 
+import java.io.Serializable;
+
 /**
+ * Copy from the primefaces example.
+ *
  * @since 15.05.2018
  *
  */
-public class Theme {
+public class Theme implements Serializable {
+	private static final long serialVersionUID = 5394116683138047620L;
 
 	private int id;
 

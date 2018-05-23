@@ -11,7 +11,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
 
 import com.kita.TournamentEvent;
 import com.kita.attributes.EventDay;
@@ -104,13 +103,5 @@ public class TournamentEventEditPageBean implements Serializable {
 
 	private TournamentEventBridge getBridge() {
 		return tournamentEventBridge;
-	}
-
-	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {
-		refreshGui();
-	}
-
-	private void refreshGui() {
-		workingTournamentEvent = getTournamentEvent(workingTournamentEvent.getUuid());
 	}
 }

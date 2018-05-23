@@ -27,11 +27,10 @@ import com.kita.web.theme.ThemeService;
 @ManagedBean
 @SessionScoped
 public class SettingsPageBean implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4020489911949676020L;
 
 	private Settings settings = Settings.newInstance();
 	private SettingsBridge settingsBridge;
-
 	private List<Theme> themes;
 
 	@ManagedProperty("#{themeService}")
