@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import com.kita.Person;
 import com.kita.attributes.Forename;
+import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
 
 /**
@@ -15,6 +16,7 @@ public class PersonBuilder {
 	private UUID uuid = UUID.randomUUID();
 	private Surename surename = Surename.newInstance("Surename");
 	private Forename forename = Forename.newInstance("Forename");
+	private Kampfname kampfname = Kampfname.newInstance("Kampfname");
 
 	public PersonBuilder withUuid(UUID anUuid) {
 		uuid = anUuid;
@@ -31,11 +33,18 @@ public class PersonBuilder {
 		return this;
 	}
 
+	public PersonBuilder withKampfname(Kampfname aKampfname) {
+		kampfname = aKampfname;
+		return this;
+	}
+
 	public Person build() {
 		Person person = Person.newInstance();
+
 		person.setUuid(uuid);
 		person.setSurename(surename);
 		person.setForename(forename);
+		person.setKampfname(kampfname);
 
 		return person;
 	}
