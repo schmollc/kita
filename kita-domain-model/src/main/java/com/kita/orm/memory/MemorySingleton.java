@@ -24,10 +24,10 @@ public class MemorySingleton {
 	}
 
 	private MemorySingleton() {
-		Map<UUID, Person> persons = new HashMap<UUID, Person>();
+		Map<UUID, Person> persons = new HashMap<>();
 		bigData.put(PERSON, persons);
 
-		Map<UUID, TournamentEvent> tournamentEvents = new HashMap<UUID, TournamentEvent>();
+		Map<UUID, TournamentEvent> tournamentEvents = new HashMap<>();
 		bigData.put(TOURNAMENT_EVENT, tournamentEvents);
 	}
 
