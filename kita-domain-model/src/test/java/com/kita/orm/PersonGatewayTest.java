@@ -11,6 +11,7 @@ import org.junit.runners.MethodSorters;
 
 import com.kita.Person;
 import com.kita.attributes.Forename;
+import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
 
 /**
@@ -27,7 +28,7 @@ public abstract class PersonGatewayTest {
 	public abstract PersonGateway getSut();
 
 	@Test
-	public void testGetForExistingEntry() {
+	public void testGet_ForExistingEntry() {
 		Person firstMember = createJustusJonas();
 		getSut().set(firstMember);
 		getSut().set(createPeterShaw());
@@ -39,7 +40,7 @@ public abstract class PersonGatewayTest {
 	}
 
 	@Test
-	public void testGetForNonExistingEntry() {
+	public void testGet_ForNonExistingEntry() {
 		getSut().set(createJustusJonas());
 		getSut().set(createPeterShaw());
 
@@ -75,45 +76,49 @@ public abstract class PersonGatewayTest {
 	@Test
 	public void testSet_ForExistingPerson() {
 		// ARRANGE
-		Person firstMember = createJustusJonas();
-		UUID uuidFromFirstMember = firstMember.getUuid();
+		Person person = createJustusJonas();
+		UUID uuidFromPerson = person.getUuid();
 
-		getSut().set(firstMember);
+		getSut().set(person);
 		getSut().set(createPeterShaw());
 
-		Person updateMember = getSut().get(uuidFromFirstMember);
+		Person updatePerson = getSut().get(uuidFromPerson);
 
 		Forename newForename = Forename.newInstance("Bob");
-		updateMember.setForename(newForename);
+		updatePerson.setForename(newForename);
 		Surename newSurename = Surename.newInstance("Andrews");
-		updateMember.setSurename(newSurename);
+		updatePerson.setSurename(newSurename);
+		Kampfname newKampfname = Kampfname.newInstance("Goalkeeper");
+		updatePerson.setKampfname(newKampfname);
 
 		// ACT
-		getSut().set(updateMember);
+		getSut().set(updatePerson);
 
 		// ASSERT
-		Person checkPerson = getSut().get(uuidFromFirstMember);
+		Person checkPerson = getSut().get(uuidFromPerson);
 		assertNotNull(checkPerson);
 
 		assertEquals("[Forename] not correct.", newForename, checkPerson.getForename());
 		assertEquals("[Surename] not correct.", newSurename, checkPerson.getSurename());
+		assertEquals("[Kampfname] not correct.", newKampfname, checkPerson.getKampfname());
 
 	}
 
 	private Person createJustusJonas() {
-		return createPerson("Justus", "Jonas");
+		return createPerson("Justus", "Jonas", "Erster Detektiv");
 	}
 
 	private Person createPeterShaw() {
-		return createPerson("Peter", "Shaw");
+		return createPerson("Peter", "Shaw", "Zweiter Detektiv");
 	}
 
-	private Person createPerson(String forename, String surename) {
+	private Person createPerson(String forename, String surename, String kampfname) {
 		Person person = Person.newInstance();
 
 		person.setForename(Forename.newInstance(forename));
 		person.setSurename(Surename.newInstance(surename));
+		person.setKampfname(Kampfname.newInstance(kampfname));
+
 		return person;
 	}
-
 }
