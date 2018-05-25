@@ -16,6 +16,7 @@ import javax.faces.event.ActionEvent;
 import org.primefaces.event.SelectEvent;
 
 import com.kita.Person;
+import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
@@ -24,7 +25,7 @@ import com.kita.web.bridge.PersonBridgeImpl;
 import com.kita.web.local.I18N;
 
 /**
- * @since 2.05.2018
+ * @since 22.05.2018
  *
  */
 @ManagedBean
@@ -67,6 +68,10 @@ public class PersonBrowsePageBean implements Serializable {
 
 	public int sortByKampfname(Kampfname name1, Kampfname name2) {
 		return Kampfname.sortByKampfname(name1, name2);
+	}
+
+	public int sortByEmail(Email name1, Email name2) {
+		return Email.sortByEmail(name1, name2);
 	}
 
 	public Integer getNumberOfResults() {

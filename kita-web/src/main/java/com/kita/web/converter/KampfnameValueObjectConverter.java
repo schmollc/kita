@@ -8,7 +8,7 @@ import com.kita.attributes.Kampfname;
  * @since   22.05.2018
  *
  */
-@FacesConverter("com.relayd.web.converter.KampfnameValueObjectConverter")
+@FacesConverter("com.kita.web.converter.KampfnameValueObjectConverter")
 public class KampfnameValueObjectConverter extends NameValueObjectConverter {
 
 	@Override

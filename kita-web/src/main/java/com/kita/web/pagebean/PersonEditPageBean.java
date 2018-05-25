@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import org.primefaces.context.RequestContext;
 
 import com.kita.Person;
+import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
@@ -48,7 +49,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().height(200).build();
+		Map<String, Object> options = new DialogOptionsBuilder().height(220).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PERSON_PERSON_DIALOG_ID, options, null);
 	}
 
@@ -105,6 +106,14 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setKampfname(Kampfname aKampfname) {
 		workingPerson.setKampfname(aKampfname);
+	}
+
+	public Email getEmail() {
+		return workingPerson.getEmail();
+	}
+
+	public void setEmail(Email anEmail) {
+		workingPerson.setEmail(anEmail);
 	}
 
 	private PersonBridge getBridge() {
