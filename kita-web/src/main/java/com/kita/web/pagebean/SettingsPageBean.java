@@ -13,8 +13,8 @@ import javax.faces.event.AjaxBehaviorEvent;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.component.themeswitcher.ThemeSwitcher;
 
+import com.kita.Settings;
 import com.kita.orm.GatewayType;
-import com.kita.web.bridge.Settings;
 import com.kita.web.bridge.SettingsBridge;
 import com.kita.web.bridge.SettingsBridgeImpl;
 import com.kita.web.theme.Theme;

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.kita.Person;
+import com.kita.Settings;
 import com.kita.orm.GatewayType;
 import com.kita.orm.PersonGateway;
 import com.kita.orm.PersonGatewayFactory;

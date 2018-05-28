@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+import com.kita.Settings;
 import com.kita.TournamentEvent;
 import com.kita.orm.GatewayType;
 import com.kita.orm.TournamentEventGateway;
