@@ -16,7 +16,7 @@ import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
 import com.kita.orm.Validation;
 import com.kita.web.bridge.PersonBridge;
-import com.kita.web.bridge.PersonBridgeImpl;
+import com.kita.web.bridge.PersonBridgeDecorator;
 
 /**
  * @since 22.05.2018
@@ -32,7 +32,7 @@ public class PersonEditPageBean implements Serializable {
 	Person workingPerson = null;
 
 	public PersonEditPageBean() {
-		personBridge = new PersonBridgeImpl();
+		personBridge = PersonBridgeDecorator.newInstance();
 	}
 
 	public void openDialogForCreatePerson() {
