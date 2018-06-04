@@ -9,10 +9,12 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.mockito.Matchers;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.kita.attributes.Email;
+import com.kita.orm.Validation;
 
 import static org.mockito.Mockito.*;
 
@@ -55,6 +57,26 @@ public class PersonBridgeImplTest {
 		boolean condition = sut.doesEmailExist(email);
 
 		assertTrue("[doesEmailExist] not correct!", condition);
+	}
+
+	@Test
+	public void testPersistPerson_ForEmailExist() {
+		doReturn(true).when(sut).doesEmailExist(Matchers.any());
+		Person dummyPerson = new PersonBuilder().build();
+
+		Validation actual = sut.persistPerson(dummyPerson);
+
+		verify(sut, never()).getGateway();
+	}
+
+	@Test
+	public void testPersistPerson_ForEmailNotExist() {
+		doReturn(false).when(sut).doesEmailExist(Matchers.any());
+		Person dummyPerson = new PersonBuilder().build();
+
+		Validation actual = sut.persistPerson(dummyPerson);
+
+		verify(sut).getGateway();
 	}
 
 }
