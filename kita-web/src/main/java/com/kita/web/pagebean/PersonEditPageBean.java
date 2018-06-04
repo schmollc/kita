@@ -65,7 +65,7 @@ public class PersonEditPageBean implements Serializable {
 
 	public void save() {
 		Validation validation = persistPerson();
-		if (validation.ok()) {
+		if (validation.success()) {
 			closeDialog();
 		}
 	}

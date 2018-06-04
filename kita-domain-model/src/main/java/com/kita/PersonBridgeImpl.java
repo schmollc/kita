@@ -32,11 +32,13 @@ public class PersonBridgeImpl implements Serializable {
 	}
 
 	public Validation persistPerson(Person person) {
-		Validation validationResult = Validation.newInstance();
+		boolean ok = true;
 		if (doesEmailExist(person.getEmail())) {
+			ok = false;
 		} else {
 			getGateway().set(person);
 		}
+		Validation validationResult = Validation.success(ok);
 		return validationResult;
 	}
 

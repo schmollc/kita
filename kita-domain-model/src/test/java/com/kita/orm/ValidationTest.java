@@ -11,12 +11,23 @@ import org.junit.runners.MethodSorters;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ValidationTest {
-	private Validation sut = Validation.newInstance();
 
 	@Test
-	public void testOk() {
-		boolean condition = sut.ok();
+	public void testOk_forSuccess() {
+		Validation sut = Validation.success(true);
+
+		boolean condition = sut.success();
 
 		assertTrue("[ok] not correct!", condition);
 	}
+
+	@Test
+	public void testOk_forNonSuccess() {
+		Validation sut = Validation.success(false);
+
+		boolean condition = sut.success();
+
+		assertFalse("[ok] not correct!", condition);
+	}
+
 }

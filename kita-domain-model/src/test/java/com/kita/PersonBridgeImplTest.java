@@ -64,9 +64,12 @@ public class PersonBridgeImplTest {
 		doReturn(true).when(sut).doesEmailExist(Matchers.any());
 		Person dummyPerson = new PersonBuilder().build();
 
-		Validation actual = sut.persistPerson(dummyPerson);
+		Validation validation = sut.persistPerson(dummyPerson);
+		boolean condition = validation.success();
 
 		verify(sut, never()).getGateway();
+		assertFalse("[persistPerson] not correct!", condition);
+
 	}
 
 	@Test
@@ -74,9 +77,11 @@ public class PersonBridgeImplTest {
 		doReturn(false).when(sut).doesEmailExist(Matchers.any());
 		Person dummyPerson = new PersonBuilder().build();
 
-		Validation actual = sut.persistPerson(dummyPerson);
+		Validation validation = sut.persistPerson(dummyPerson);
+		boolean condition = validation.success();
 
 		verify(sut).getGateway();
+		assertTrue("[persistPerson] not correct!", condition);
 	}
 
 }
