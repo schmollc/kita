@@ -9,6 +9,7 @@ import com.kita.Settings;
 import com.kita.orm.GatewayType;
 import com.kita.orm.PersonGateway;
 import com.kita.orm.PersonGatewayFactory;
+import com.kita.orm.Validation;
 
 /**
  * Only a simple Wrapper for the Gateway.
@@ -25,8 +26,9 @@ public class PersonBridgeImpl implements Serializable, PersonBridge {
 	}
 
 	@Override
-	public void persistPerson(Person aPerson) {
+	public Validation persistPerson(Person aPerson) {
 		getGateway().set(aPerson);
+		return Validation.newInstance();
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
+import com.kita.orm.Validation;
 import com.kita.web.bridge.PersonBridge;
 import com.kita.web.bridge.PersonBridgeImpl;
 
@@ -63,12 +64,15 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		persistPerson();
-		closeDialog();
+		Validation validation = persistPerson();
+		if (validation.ok()) {
+			closeDialog();
+		}
 	}
 
-	void persistPerson() {
-		getBridge().persistPerson(workingPerson);
+	Validation persistPerson() {
+		Validation validation = getBridge().persistPerson(workingPerson);
+		return validation;
 	}
 
 	void closeDialog() {
