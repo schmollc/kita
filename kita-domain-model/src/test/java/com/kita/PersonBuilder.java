@@ -43,6 +43,11 @@ public class PersonBuilder {
 		email = anEmail;
 		return this;
 	}
+	
+	public PersonBuilder withEmail(String anEmail) {
+		email = Email.newInstance(anEmail);
+		return this;
+	}
 
 	public Person build() {
 		Person person = Person.newInstance();

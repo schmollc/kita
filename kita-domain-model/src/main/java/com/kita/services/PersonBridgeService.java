@@ -35,7 +35,7 @@ public class PersonBridgeService implements Serializable {
 
 	public Validation persistPerson(Person person) {
 		Validation validationResult;
-		if (doesEmailExist(person.getEmail())) {
+		if (doesEmailExist(person)) {
 			validationResult = Validation.failure();
 		} else {
 			validationResult = Validation.ok();
@@ -44,6 +44,23 @@ public class PersonBridgeService implements Serializable {
 		return validationResult;
 	}
 
+
+	boolean doesEmailExist(Person personToCheck) {
+		for (Person person : all()) {
+			if (!personToCheck.equals(person)) {
+				if (emailsEqual(personToCheck, person)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean emailsEqual(Person personToCheck, Person person) {
+		Email email = person.getEmail();
+		return email.equals(personToCheck.getEmail());
+	}
+	
 	public Person get(UUID uuid) {
 		return getGateway().get(uuid);
 	}
@@ -58,14 +75,5 @@ public class PersonBridgeService implements Serializable {
 
 	public PersonGateway getGateway() {
 		return PersonGatewayFactory.get(getGatewayType());
-	}
-
-	boolean doesEmailExist(Email email) {
-		for (Person each : all()) {
-			if (each.getEmail().equals(email)) {
-				return true;
-			}
-		}
-		return false;
 	}
 }
