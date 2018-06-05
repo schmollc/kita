@@ -16,7 +16,7 @@ import org.primefaces.component.themeswitcher.ThemeSwitcher;
 import com.kita.Settings;
 import com.kita.orm.GatewayType;
 import com.kita.web.bridge.SettingsBridge;
-import com.kita.web.bridge.SettingsBridgeImpl;
+import com.kita.web.bridge.SettingsBridgeDecorator;
 import com.kita.web.theme.Theme;
 import com.kita.web.theme.ThemeService;
 
@@ -39,7 +39,7 @@ public class SettingsPageBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		themes = service.getThemes();
-		settingsBridge = new SettingsBridgeImpl();
+		settingsBridge = SettingsBridgeDecorator.newInstance();
 	}
 
 	public SettingsBridge getSettingsBridge() {
