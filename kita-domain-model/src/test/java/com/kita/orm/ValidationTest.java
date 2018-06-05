@@ -13,21 +13,25 @@ import org.junit.runners.MethodSorters;
 public class ValidationTest {
 
 	@Test
-	public void testOk_forSuccess() {
-		Validation sut = Validation.success(true);
+	public void testOk() {
+		Validation sut = Validation.ok();
 
 		boolean condition = sut.success();
+		String object = sut.getMessage();
 
 		assertTrue("[ok] not correct!", condition);
+		assertNull("[errorMessage] should be null!", object);
 	}
 
 	@Test
-	public void testOk_forNonSuccess() {
-		Validation sut = Validation.success(false);
+	public void testFailure() {
+		Validation sut = Validation.failure();
 
 		boolean condition = sut.success();
+		String actual = sut.getMessage();
+		String expected = I18N.EMAIL_NOT_UNIQUE;
 
 		assertFalse("[ok] not correct!", condition);
+		assertEquals("[errorMessage] not correct!", expected, actual);
 	}
-
 }

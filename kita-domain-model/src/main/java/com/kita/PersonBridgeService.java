@@ -16,15 +16,15 @@ import com.kita.orm.Validation;
  * @since 22.05.2018
  *
  */
-public class PersonBridgeImpl implements Serializable {
+public class PersonBridgeService implements Serializable {
 	private static final long serialVersionUID = -564518438845267226L;
 
-	private PersonBridgeImpl() {
+	private PersonBridgeService() {
 
 	}
 
-	public static PersonBridgeImpl newInstance() {
-		return new PersonBridgeImpl();
+	public static PersonBridgeService newInstance() {
+		return new PersonBridgeService();
 	}
 
 	public List<Person> all() {
@@ -32,13 +32,13 @@ public class PersonBridgeImpl implements Serializable {
 	}
 
 	public Validation persistPerson(Person person) {
-		boolean ok = true;
+		Validation validationResult;
 		if (doesEmailExist(person.getEmail())) {
-			ok = false;
+			validationResult = Validation.failure();
 		} else {
+			validationResult = Validation.ok();
 			getGateway().set(person);
 		}
-		Validation validationResult = Validation.success(ok);
 		return validationResult;
 	}
 

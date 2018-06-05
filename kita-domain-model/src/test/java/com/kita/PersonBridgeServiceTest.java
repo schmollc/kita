@@ -23,10 +23,10 @@ import static org.mockito.Mockito.*;
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(MockitoJUnitRunner.class)
-public class PersonBridgeImplTest {
+public class PersonBridgeServiceTest {
 
 	@Spy
-	private PersonBridgeImpl sut;
+	private PersonBridgeService sut;
 
 	@Test
 	public void testDoesEmailExist_ForEmailDoesNotExist() {

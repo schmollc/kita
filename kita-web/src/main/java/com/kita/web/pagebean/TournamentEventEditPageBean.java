@@ -15,9 +15,9 @@ import org.primefaces.context.RequestContext;
 import com.kita.TournamentEvent;
 import com.kita.attributes.EventDay;
 import com.kita.attributes.Eventname;
+import com.kita.orm.I18N;
 import com.kita.web.bridge.TournamentEventBridge;
 import com.kita.web.bridge.TournamentEventBridgeImpl;
-import com.kita.web.local.I18N;
 
 /**
  * @since 15.03.2018

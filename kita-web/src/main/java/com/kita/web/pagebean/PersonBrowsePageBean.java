@@ -20,9 +20,9 @@ import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
+import com.kita.orm.I18N;
 import com.kita.web.bridge.PersonBridge;
 import com.kita.web.bridge.PersonBridgeDecorator;
-import com.kita.web.local.I18N;
 
 /**
  * @since 22.05.2018

@@ -6,24 +6,30 @@ package com.kita.orm;
 public class Validation {
 
 	private boolean success;
+	private String message;
 
 	private Validation() {
 
 	}
 
-	public static Validation newInstance() {
-		return new Validation();
+	public static Validation ok() {
+		Validation validation = new Validation();
+		validation.success = true;
+		return validation;
+	}
+
+	public static Validation failure() {
+		Validation validation = new Validation();
+		validation.success = false;
+		validation.message = I18N.EMAIL_NOT_UNIQUE;
+		return validation;
 	}
 
 	public boolean success() {
 		return success;
 	}
 
-	public static Validation success(boolean aSuccessflag) {
-		Validation validation = new Validation();
-		validation.success = aSuccessflag;
-
-		return validation;
+	public String getMessage() {
+		return message;
 	}
-
 }

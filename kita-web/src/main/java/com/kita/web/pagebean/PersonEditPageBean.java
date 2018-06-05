@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
@@ -14,6 +16,7 @@ import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
+import com.kita.orm.I18N;
 import com.kita.orm.Validation;
 import com.kita.web.bridge.PersonBridge;
 import com.kita.web.bridge.PersonBridgeDecorator;
@@ -67,6 +70,8 @@ public class PersonEditPageBean implements Serializable {
 		Validation validation = persistPerson();
 		if (validation.success()) {
 			closeDialog();
+		} else {
+			showError();
 		}
 	}
 
@@ -77,6 +82,12 @@ public class PersonEditPageBean implements Serializable {
 
 	void closeDialog() {
 		RequestContext.getCurrentInstance().closeDialog(workingPerson);
+	}
+
+	void showError() {
+		// TODO - REL-313 - wie im ObjectConverter sollte die Nachricht aus dem ValidationResult Object kommen!
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, I18N.EMAIL_NOT_UNIQUE, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	public void saveAndNext() {

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.kita.Person;
-import com.kita.PersonBridgeImpl;
+import com.kita.PersonBridgeService;
 import com.kita.orm.Validation;
 
 /**
@@ -17,7 +17,7 @@ import com.kita.orm.Validation;
 public class PersonBridgeDecorator implements Serializable, PersonBridge {
 	private static final long serialVersionUID = -564518438845267226L;
 
-	private PersonBridgeImpl personBridgeImpl = PersonBridgeImpl.newInstance();
+	private PersonBridgeService personBridgeImpl = PersonBridgeService.newInstance();
 
 	private PersonBridgeDecorator() {
 
@@ -27,7 +27,7 @@ public class PersonBridgeDecorator implements Serializable, PersonBridge {
 		return new PersonBridgeDecorator();
 	}
 
-	private PersonBridgeImpl getPersonBridgeImpl() {
+	private PersonBridgeService getPersonBridgeImpl() {
 		return personBridgeImpl;
 	}
 
