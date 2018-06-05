@@ -18,15 +18,15 @@ import com.kita.orm.Validation;
  * @since 22.05.2018
  *
  */
-public class PersonBridgeService implements Serializable {
+public class PersonService implements Serializable {
 	private static final long serialVersionUID = -564518438845267226L;
 
-	private PersonBridgeService() {
+	private PersonService() {
 
 	}
 
-	public static PersonBridgeService newInstance() {
-		return new PersonBridgeService();
+	public static PersonService newInstance() {
+		return new PersonService();
 	}
 
 	public List<Person> all() {
