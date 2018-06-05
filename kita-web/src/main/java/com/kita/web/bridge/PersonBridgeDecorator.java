@@ -9,15 +9,14 @@ import com.kita.PersonBridgeService;
 import com.kita.orm.Validation;
 
 /**
- * Only a simple Wrapper for the Gateway.
- *
  * @since 22.05.2018
  *
  */
 public class PersonBridgeDecorator implements Serializable, PersonBridge {
 	private static final long serialVersionUID = -564518438845267226L;
 
-	private PersonBridgeService personBridgeImpl = PersonBridgeService.newInstance();
+	// FCoI
+	private PersonBridgeService personBridgeService = PersonBridgeService.newInstance();
 
 	private PersonBridgeDecorator() {
 
@@ -28,7 +27,7 @@ public class PersonBridgeDecorator implements Serializable, PersonBridge {
 	}
 
 	private PersonBridgeService getPersonBridgeImpl() {
-		return personBridgeImpl;
+		return personBridgeService;
 	}
 
 	@Override
