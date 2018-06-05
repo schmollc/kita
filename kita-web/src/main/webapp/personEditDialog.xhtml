@@ -32,7 +32,7 @@
 				id="forename"
 				value="#{personEditPageBean.forename}"
 				style="width:180px">
-				<f:converter converterId="com.relayd.web.converter.ForenameValueObjectConverter" />
+				<f:converter converterId="com.kita.web.converter.ForenameValueObjectConverter" />
 			</p:inputText>
 
 			<p:outputLabel
@@ -42,7 +42,7 @@
 				id="surename"
 				value="#{personEditPageBean.surename}"
 				style="width:180px">
-				<f:converter converterId="com.relayd.web.converter.SurenameValueObjectConverter" />
+				<f:converter converterId="com.kita.web.converter.SurenameValueObjectConverter" />
 			</p:inputText>
 
 			<p:outputLabel
@@ -52,7 +52,18 @@
 				id="kampfname"
 				value="#{personEditPageBean.kampfname}"
 				style="width:180px">
-				<f:converter converterId="com.relayd.web.converter.KampfnameValueObjectConverter" />
+				<f:converter converterId="com.kita.web.converter.KampfnameValueObjectConverter" />
+			</p:inputText>
+
+			<p:outputLabel
+				for="email"
+				value="Email:" />
+			<p:inputText
+				id="email"
+				value="#{personEditPageBean.email}"
+				style="width:180px">
+				<f:converter converterId="com.kita.web.converter.EmailValueObjectConverter" />
+				<p:ajax event="valueChange"/>				
 			</p:inputText>
 
 		</h:panelGrid>

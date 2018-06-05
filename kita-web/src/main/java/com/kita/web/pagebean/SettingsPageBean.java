@@ -13,10 +13,10 @@ import javax.faces.event.AjaxBehaviorEvent;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.component.themeswitcher.ThemeSwitcher;
 
+import com.kita.Settings;
 import com.kita.orm.GatewayType;
-import com.kita.web.bridge.Settings;
 import com.kita.web.bridge.SettingsBridge;
-import com.kita.web.bridge.SettingsBridgeImpl;
+import com.kita.web.bridge.SettingsBridgeDecorator;
 import com.kita.web.theme.Theme;
 import com.kita.web.theme.ThemeService;
 
@@ -27,11 +27,10 @@ import com.kita.web.theme.ThemeService;
 @ManagedBean
 @SessionScoped
 public class SettingsPageBean implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -4020489911949676020L;
 
 	private Settings settings = Settings.newInstance();
 	private SettingsBridge settingsBridge;
-
 	private List<Theme> themes;
 
 	@ManagedProperty("#{themeService}")
@@ -40,7 +39,7 @@ public class SettingsPageBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		themes = service.getThemes();
-		settingsBridge = new SettingsBridgeImpl();
+		settingsBridge = SettingsBridgeDecorator.newInstance();
 	}
 
 	public SettingsBridge getSettingsBridge() {

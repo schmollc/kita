@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.kita.Person;
-import com.kita.orm.GatewayType;
+import com.kita.orm.Validation;
 
 /**
  * This Bridge could handle the REST - Serivce
@@ -17,11 +17,10 @@ public interface PersonBridge {
 
 	List<Person> all();
 
-	void persistPerson(Person person);
+	Validation persistPerson(Person person);
 
 	Person get(UUID uuid);
 
 	void remove(Person person);
 
-	GatewayType getGatewayType();
 }

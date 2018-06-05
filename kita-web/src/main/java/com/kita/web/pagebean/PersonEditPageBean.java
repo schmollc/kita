@@ -4,17 +4,22 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
 
 import com.kita.Person;
+import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
+import com.kita.orm.I18N;
+import com.kita.orm.Validation;
 import com.kita.web.bridge.PersonBridge;
-import com.kita.web.bridge.PersonBridgeImpl;
+import com.kita.web.bridge.PersonBridgeDecorator;
 
 /**
  * @since 22.05.2018
@@ -30,7 +35,7 @@ public class PersonEditPageBean implements Serializable {
 	Person workingPerson = null;
 
 	public PersonEditPageBean() {
-		personBridge = new PersonBridgeImpl();
+		personBridge = PersonBridgeDecorator.newInstance();
 	}
 
 	public void openDialogForCreatePerson() {
@@ -48,7 +53,7 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	void openDialog() {
-		Map<String, Object> options = new DialogOptionsBuilder().height(200).build();
+		Map<String, Object> options = new DialogOptionsBuilder().height(220).build();
 		RequestContext.getCurrentInstance().openDialog(NavigationConstants.PERSON_PERSON_DIALOG_ID, options, null);
 	}
 
@@ -62,16 +67,27 @@ public class PersonEditPageBean implements Serializable {
 	}
 
 	public void save() {
-		persistPerson();
-		closeDialog();
+		Validation validation = persistPerson();
+		if (validation.success()) {
+			closeDialog();
+		} else {
+			showError();
+		}
 	}
 
-	void persistPerson() {
-		getBridge().persistPerson(workingPerson);
+	Validation persistPerson() {
+		Validation validation = getBridge().persistPerson(workingPerson);
+		return validation;
 	}
 
 	void closeDialog() {
 		RequestContext.getCurrentInstance().closeDialog(workingPerson);
+	}
+
+	void showError() {
+		// TODO - REL-313 - wie im ObjectConverter sollte die Nachricht aus dem ValidationResult Object kommen!
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, I18N.EMAIL_NOT_UNIQUE, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	public void saveAndNext() {
@@ -105,6 +121,14 @@ public class PersonEditPageBean implements Serializable {
 
 	public void setKampfname(Kampfname aKampfname) {
 		workingPerson.setKampfname(aKampfname);
+	}
+
+	public Email getEmail() {
+		return workingPerson.getEmail();
+	}
+
+	public void setEmail(Email anEmail) {
+		workingPerson.setEmail(anEmail);
 	}
 
 	private PersonBridge getBridge() {

@@ -8,7 +8,7 @@ import com.kita.attributes.Forename;
  * @since 22.05.2018
  *
  */
-@FacesConverter("com.relayd.web.converter.ForenameValueObjectConverter")
+@FacesConverter("com.kita.web.converter.ForenameValueObjectConverter")
 public class ForenameValueObjectConverter extends NameValueObjectConverter {
 
 	@Override

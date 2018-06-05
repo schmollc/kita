@@ -1,4 +1,4 @@
-package com.kita.web;
+package com.kita;
 
 import static org.junit.Assert.*;
 
@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import com.kita.orm.GatewayType;
-import com.kita.web.bridge.Settings;
 
 /**
  * If you don't like unit testing your product, most likely your customers won't like to test it either.

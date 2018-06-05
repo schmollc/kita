@@ -64,7 +64,7 @@
 				filterBy="#{person.forename}"
 				sortBy="#{person.forename}"
 				sortFunction="#{personBrowsePageBean.sortByForename}"
-				width="33%">
+				width="25%">
 				<h:outputText value="#{person.forename}" />
 			</p:column>
 
@@ -73,7 +73,7 @@
 				filterBy="#{person.surename}"
 				sortBy="#{person.surename}"
 				sortFunction="#{personBrowsePageBean.sortBySurename}"
-				width="33%">
+				width="25%">
 				<h:outputText value="#{person.surename}" />
 			</p:column>
 
@@ -82,8 +82,17 @@
 				filterBy="#{person.kampfname}"
 				sortBy="#{person.kampfname}"
 				sortFunction="#{personBrowsePageBean.sortByKampfname}"
-				width="33%">
+				width="25%">
 				<h:outputText value="#{person.kampfname}" />
+			</p:column>
+
+			<p:column
+				headerText="Email"
+				filterBy="#{person.email}"
+				sortBy="#{person.email}"
+				sortFunction="#{personBrowsePageBean.sortByEmail}"
+				width="25%">
+				<h:outputText value="#{person.email}" />
 			</p:column>
 
 		</p:dataTable>

@@ -9,6 +9,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.runners.MethodSorters;
 
 import com.kita.Person;
+import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
@@ -89,6 +90,17 @@ public class PersonToPersonMapperTest {
 
 		Kampfname actual = target.getKampfname();
 		assertEquals("Mapping of [kampfname] is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testMapPersonToPerson_Email() {
+		Email expected = Email.newInstance("Justus.Jonas@rockyBeach.com");
+		source.setEmail(expected);
+
+		sut.mapPersonToPerson(source, target);
+
+		Email actual = target.getEmail();
+		assertEquals("Mapping of [email] is not correct!", expected, actual);
 	}
 
 }

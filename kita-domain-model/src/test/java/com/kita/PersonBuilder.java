@@ -1,8 +1,7 @@
-package com.kita.web.pagebean;
+package com.kita;
 
 import java.util.UUID;
 
-import com.kita.Person;
 import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;

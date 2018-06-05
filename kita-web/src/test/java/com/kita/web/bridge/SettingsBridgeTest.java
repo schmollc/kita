@@ -16,9 +16,9 @@ import org.junit.runners.MethodSorters;
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class SettingsBridgeImplTest {
+public class SettingsBridgeTest {
 
-	private SettingsBridgeImpl sut = new SettingsBridgeImpl();
+	private SettingsBridge sut = SettingsBridgeDecorator.newInstance();
 
 	@Test
 	public void testIsSerializable() {

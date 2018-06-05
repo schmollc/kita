@@ -1,4 +1,4 @@
-package com.kita.web.bridge;
+package com.kita;
 
 import java.io.Serializable;
 

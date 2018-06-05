@@ -3,6 +3,7 @@ package com.kita;
 import java.io.Serializable;
 import java.util.UUID;
 
+import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
@@ -19,6 +20,8 @@ public class Person implements Serializable {
 	private UUID uuid;
 
 	private Kampfname kampfname;
+
+	private Email email;
 
 	private Person() {
 		uuid = UUID.randomUUID();
@@ -70,6 +73,25 @@ public class Person implements Serializable {
 
 	public Kampfname getKampfname() {
 		return kampfname;
+	}
+
+	public Email getEmail() {
+		return email;
+	}
+
+	public void setEmail(Email anEmail) {
+		if (anEmail == null) {
+			email = Email.newInstance();
+		} else {
+			email = anEmail;
+		}
+	}
+
+	public boolean isSame(Person person) {
+		if (getEmail().equals(person.getEmail())) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override

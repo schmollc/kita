@@ -9,6 +9,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Kampfname;
 import com.kita.attributes.Surename;
@@ -87,17 +88,14 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testToString() {
+	public void testEmail() {
 		Person sut = Person.newInstance();
+		Email expected = Email.newInstance("Justus.Jonas@rockyBeach.com");
 
-		sut.setForename(Forename.newInstance("Justus"));
-		sut.setSurename(Surename.newInstance("Jonas"));
-		sut.setKampfname(Kampfname.newInstance("Lokomotive C&A"));
+		sut.setEmail(expected);
 
-		String actual = sut.toString();
-
-		String expected = "Justus Jonas - Lokomotive C&A";
-		assertEquals("[toString] not correct!", expected, actual);
+		Email actual = sut.getEmail();
+		assertEquals("[email] not correct!", expected, actual);
 	}
 
 	@Test
@@ -128,6 +126,50 @@ public class PersonTest {
 
 		Kampfname actual = sut.getKampfname();
 		assertNotNull("Person must not return [kampfname] equals 'null'!", actual);
+	}
+
+	@Test
+	public void testIsTheSame_WithSameEmail() {
+		Person sut = Person.newInstance();
+
+		sut.setEmail(Email.newInstance("Justus.Jonas@rockyBeach.com"));
+
+		Person secondSut = Person.newInstance();
+
+		secondSut.setEmail(Email.newInstance("Justus.Jonas@rockyBeach.com"));
+
+		boolean condition = sut.isSame(secondSut);
+
+		assertTrue("[isSame] not correct!", condition);
+	}
+
+	@Test
+	public void testIsTheSame_WithNotSameValues() {
+		Person sut = Person.newInstance();
+
+		sut.setEmail(Email.newInstance("Justus.Jonas@rockyBeach.com"));
+
+		Person secondSut = Person.newInstance();
+
+		secondSut.setEmail(Email.newInstance("Peter.Shaw@rockyBeach.com"));
+
+		boolean condition = sut.isSame(secondSut);
+
+		assertFalse("[isSame] not correct!", condition);
+	}
+
+	@Test
+	public void testToString() {
+		Person sut = Person.newInstance();
+
+		sut.setForename(Forename.newInstance("Justus"));
+		sut.setSurename(Surename.newInstance("Jonas"));
+		sut.setKampfname(Kampfname.newInstance("Lokomotive C&A"));
+
+		String actual = sut.toString();
+
+		String expected = "Justus Jonas - Lokomotive C&A";
+		assertEquals("[toString] not correct!", expected, actual);
 	}
 
 	@Test
@@ -168,6 +210,7 @@ public class PersonTest {
 	public void testEqualsWithNotCompatibleClass() {
 		Person sut = Person.newInstance();
 
+		@SuppressWarnings("unlikely-arg-type")
 		boolean actual = sut.equals(new String());
 
 		assertFalse(actual);
