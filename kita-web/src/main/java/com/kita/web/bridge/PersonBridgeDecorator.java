@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.kita.Person;
-import com.kita.PersonBridgeService;
 import com.kita.orm.Validation;
+import com.kita.services.PersonBridgeService;
 
 /**
  * @since 22.05.2018

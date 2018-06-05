@@ -1,9 +1,11 @@
-package com.kita;
+package com.kita.services;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
+import com.kita.Person;
+import com.kita.Settings;
 import com.kita.attributes.Email;
 import com.kita.orm.GatewayType;
 import com.kita.orm.PersonGateway;

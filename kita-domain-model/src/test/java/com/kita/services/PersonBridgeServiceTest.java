@@ -1,4 +1,4 @@
-package com.kita;
+package com.kita.services;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +13,8 @@ import org.mockito.Matchers;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.kita.Person;
+import com.kita.PersonBuilder;
 import com.kita.attributes.Email;
 import com.kita.orm.Validation;
 
