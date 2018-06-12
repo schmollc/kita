@@ -29,6 +29,6 @@ public class TournamentEventToTournamentEventMapper implements Serializable {
 
 		target.setDay(source.getDay());
 		target.setName(source.getName());
+		target.setActive(source.isActive());
 	}
-
 }

@@ -8,20 +8,18 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.kita.orm.GatewayType;
-
 /**
  * If you let the tests rot, then your code will rot too.
  * Keep your tests clean.
  *  - Robert C. Martin
  *
- * @since 14.05.2018
+ * @since 11.06.2018
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class TournamentEventBridgeImplTest {
+public class TournamentEventBridgeTest {
 
-	private TournamentEventBridgeImpl sut = new TournamentEventBridgeImpl();
+	private TournamentEventBridge sut = TournamentEventBridgeDecorator.newInstance();
 
 	@Test
 	public void testIsSerializable() {
@@ -29,12 +27,5 @@ public class TournamentEventBridgeImplTest {
 		boolean condition = sut instanceof Serializable;
 
 		assertTrue("Klasse nicht Serializable!", condition);
-	}
-
-	@Test
-	public void testGatewayType() {
-		GatewayType result = sut.getGatewayType();
-
-		assertEquals("[gatewayType] not correct!", GatewayType.MEMORY, result);
 	}
 }
