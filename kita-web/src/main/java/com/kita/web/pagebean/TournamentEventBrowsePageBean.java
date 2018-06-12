@@ -19,7 +19,7 @@ import com.kita.TournamentEvent;
 import com.kita.attributes.EventDay;
 import com.kita.attributes.Eventname;
 import com.kita.web.bridge.TournamentEventBridge;
-import com.kita.web.bridge.TournamentEventBridgeImpl;
+import com.kita.web.bridge.TournamentEventBridgeDecorator;
 
 /**
  * @since 13.05.2018
@@ -45,7 +45,7 @@ public class TournamentEventBrowsePageBean implements Serializable {
 	}
 
 	public TournamentEventBrowsePageBean() {
-		tournamentEventBridge = new TournamentEventBridgeImpl();
+		tournamentEventBridge = TournamentEventBridgeDecorator.newInstance();
 	}
 
 	private TournamentEventBridge getTournamentEventBridge() {
@@ -83,7 +83,11 @@ public class TournamentEventBrowsePageBean implements Serializable {
 	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		TournamentEvent selectedEvent = getSelectedTournamentEvent();
 		getTournamentEventEditPageBean().openDialogFor(selectedEvent.getUuid());
+	}
 
+	public void setActive(@SuppressWarnings("unused") ActionEvent actionEvent) {
+		TournamentEvent selectedEvent = getSelectedTournamentEvent();
+		getTournamentEventBridge().setActive(selectedEvent);
 	}
 
 	public void onEditClosed(@SuppressWarnings("unused") SelectEvent selectEvent) {
