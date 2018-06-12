@@ -17,7 +17,7 @@ import com.kita.attributes.EventDay;
 import com.kita.attributes.Eventname;
 import com.kita.orm.I18N;
 import com.kita.web.bridge.TournamentEventBridge;
-import com.kita.web.bridge.TournamentEventBridgeImpl;
+import com.kita.web.bridge.TournamentEventBridgeDecorator;
 
 /**
  * @since 15.03.2018
@@ -33,7 +33,7 @@ public class TournamentEventEditPageBean implements Serializable {
 	TournamentEvent workingTournamentEvent = null;
 
 	public TournamentEventEditPageBean() {
-		tournamentEventBridge = new TournamentEventBridgeImpl();
+		tournamentEventBridge = TournamentEventBridgeDecorator.newInstance();
 	}
 
 	public void openDialogFor(UUID uuid) {

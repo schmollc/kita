@@ -37,6 +37,11 @@
 						listener="#{tournamentEventBrowsePageBean.onEditClosed}"
 						update="tournamentEventTable" />
 				</p:commandButton>
+				<p:commandButton
+					actionListener="#{tournamentEventBrowsePageBean.setActive}"
+					icon="ui-icon-pin-s"
+					update="messagesTournamentEventBrowse">
+				</p:commandButton>
 			</f:facet>
 		</p:toolbar>
 		<p:dataTable
