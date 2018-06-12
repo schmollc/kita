@@ -1,6 +1,9 @@
 package com.kita;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.UUID;
 
 import com.kita.attributes.EventDay;
@@ -16,6 +19,9 @@ public class TournamentEvent implements Serializable {
 	private UUID uuid;
 	private Eventname name = Eventname.newInstance();
 	private EventDay day = EventDay.today();
+	private Collection<Participant> participants = new HashSet<>();
+
+	private boolean active;
 
 	private TournamentEvent() {
 		uuid = UUID.randomUUID();
@@ -60,6 +66,26 @@ public class TournamentEvent implements Serializable {
 
 	public void setDay(EventDay aDay) {
 		day = aDay;
+	}
+
+	public void setActive(boolean anActiveFlag) {
+		active = anActiveFlag;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void addParticipant(Participant aParticipant) {
+		participants.add(aParticipant);
+	}
+
+	public void removeParticipant(Participant aParticipant) {
+		participants.remove(aParticipant);
+	}
+
+	public Collection<Participant> getParticipants() {
+		return Collections.unmodifiableCollection(participants);
 	}
 
 	@Override

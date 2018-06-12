@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Collection;
 import java.util.UUID;
 
 import org.junit.FixMethodOrder;
@@ -81,8 +82,71 @@ public class TournamentEventTest {
 
 	@Test
 	public void testUuid() {
+		UUID object = sut.getUuid();
 
-		assertNotNull("Expected valid instance.", sut.getUuid());
+		assertNotNull("Expected valid instance!", object);
+	}
+
+	@Test
+	public void testActive() {
+		boolean expected = true;
+
+		sut.setActive(expected);
+
+		boolean actual = sut.isActive();
+
+		assertEquals("[active] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testAddParticipant() {
+		Participant participant = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
+
+		sut.addParticipant(participant);
+
+		Collection<Participant> actual = sut.getParticipants();
+
+		assertNotNull("instance of [participants] not correct!", actual);
+		assertEquals("[participants] size not correct!", 1, actual.size());
+		Participant actualParticipant = actual.iterator().next();
+
+		assertEquals("inserted participant not correct!", participant, actualParticipant);
+	}
+
+	@Test
+	public void testAddParticipant_ForSameParticipant() {
+		Participant participant = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
+
+		sut.addParticipant(participant);
+		sut.addParticipant(participant);
+
+		Collection<Participant> actual = sut.getParticipants();
+
+		assertNotNull("instance of [participants] not correct!", actual);
+		assertEquals("[participants] size not correct!", 1, actual.size());
+		Participant actualParticipant = actual.iterator().next();
+
+		assertEquals("inserted participant not correct!", participant, actualParticipant);
+	}
+
+	@Test
+	public void testRemoveParticipant() {
+		Participant participant = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
+		sut.addParticipant(participant);
+
+		sut.removeParticipant(participant);
+
+		Collection<Participant> actual = sut.getParticipants();
+
+		assertNotNull("instance of [participants] not correct!", actual);
+		boolean condition = actual.isEmpty();
+		assertTrue("[participants] size not correct!", condition);
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void testGetParticipant_ForUnmodifiable() {
+		Collection<Participant> participants = sut.getParticipants();
+		participants.add(Participant.newInstance());
 	}
 
 	@Test
