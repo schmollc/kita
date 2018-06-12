@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head/>
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="growl"
+			showDetail="true" />
+
+		<div class="divStartHeader"/>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:commandButton
+					actionListener="#{participantBrowsePageBean.add}"
+					icon="ui-icon-plus"
+					update="participantTable">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{participantBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+				<p:commandButton
+					update="form"
+					actionListener="#{participantBrowsePageBean.edit}"
+					icon="ui-icon-pencil">
+					<p:ajax
+						event="dialogReturn"
+						listener="#{participantBrowsePageBean.onEditClosed}"
+						update="form" />
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+		<p:dataTable
+			var="participant"
+			widgetVar="participantTable"
+			id="participantTable"
+			selectionMode="multiple"
+			value="#{participantBrowsePageBean.participants}"
+			selection="#{participantBrowsePageBean.selectedParticipants}"
+			scrollable="true"
+			scrollHeight="500"
+			sortBy="#{participant.surename.toString()}"
+			rowKey="#{participant.uuid}"
+			resizableColumns="true">
+			<f:facet name="header">
+	        	In total there are #{participantBrowsePageBean.getNumberOfResults()} participants.
+				<p:outputPanel>
+					<h:outputText value="&nbsp;" />
+				</p:outputPanel>
+			</f:facet>
+
+			<p:column
+				headerText="Forename"
+				filterBy="#{participant.forename}"
+				sortBy="#{participant.forename}"
+				sortFunction="#{participantBrowsePageBean.sortByForename}"
+				width="50%">
+				<h:outputText value="#{participant.forename}" />
+			</p:column>
+
+			<p:column
+				headerText="Surename"
+				filterBy="#{participant.surename}"
+				sortBy="#{participant.surename}"
+				sortFunction="#{participantBrowsePageBean.sortBySurename}"
+				width="50%">
+				<h:outputText value="#{participant.surename}" />
+			</p:column>
+		</p:dataTable>
+
+		<ui:include src="/dock.xhtml" />
+
+	</h:form>
+</h:body>
+</html>

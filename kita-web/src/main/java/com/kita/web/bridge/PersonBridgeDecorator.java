@@ -16,7 +16,7 @@ public class PersonBridgeDecorator implements Serializable, PersonBridge {
 	private static final long serialVersionUID = -564518438845267226L;
 
 	// FCoI
-	private PersonService personBridgeService = PersonService.newInstance();
+	private PersonService personService = PersonService.newInstance();
 
 	private PersonBridgeDecorator() {
 
@@ -27,7 +27,7 @@ public class PersonBridgeDecorator implements Serializable, PersonBridge {
 	}
 
 	private PersonService getPersonBridgeImpl() {
-		return personBridgeService;
+		return personService;
 	}
 
 	@Override
