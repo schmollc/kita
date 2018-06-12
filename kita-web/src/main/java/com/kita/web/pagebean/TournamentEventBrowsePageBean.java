@@ -90,6 +90,14 @@ public class TournamentEventBrowsePageBean implements Serializable {
 		getTournamentEventBridge().setActive(selectedEvent);
 	}
 
+	public String getActiveTournamentEventLabel() {
+		TournamentEvent selectedEvent = getSelectedTournamentEvent();
+		if (selectedEvent != null) {
+			return selectedEvent.toString();
+		}
+		return "";
+	}
+
 	public void onEditClosed(@SuppressWarnings("unused") SelectEvent selectEvent) {
 		refreshTournamentEvents();
 	}
@@ -115,5 +123,4 @@ public class TournamentEventBrowsePageBean implements Serializable {
 	public int sortByName(Eventname name1, Eventname name2) {
 		return Eventname.sortByName(name1, name2);
 	}
-
 }
