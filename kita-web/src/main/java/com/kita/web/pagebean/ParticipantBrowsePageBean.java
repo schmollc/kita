@@ -50,10 +50,14 @@ public class ParticipantBrowsePageBean implements Serializable {
 
 	void refreshParticipants() {
 		// TODO - medium- Eigentlich moechte ich hier nicht rumfragen muessen... ggf leeren Tournament?
-		Optional<TournamentEvent> tournemantEvent = tournamentEventBridge.getActive();
+		Optional<TournamentEvent> tournemantEvent = getTournamentEventBridge().getActive();
 		if (tournemantEvent.isPresent()) {
 			searchResult = new ArrayList<>(tournemantEvent.get().getParticipants());
 		}
+	}
+
+	private TournamentEventBridge getTournamentEventBridge() {
+		return tournamentEventBridge;
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -69,6 +73,14 @@ public class ParticipantBrowsePageBean implements Serializable {
 		//			showMessageErrorNoRowSelected();
 		//		}
 		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
+	}
+
+	public String getActiveTournamentEventLabel() {
+		Optional<TournamentEvent> selectedEvent = getTournamentEventBridge().getActive();
+		if (selectedEvent.isPresent()) {
+			return selectedEvent.get().toString();
+		}
+		return "";
 	}
 
 	public void onEditClosed(@SuppressWarnings("unused") SelectEvent event) {

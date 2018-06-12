@@ -36,6 +36,9 @@
 						listener="#{participantBrowsePageBean.onEditClosed}"
 						update="form" />
 				</p:commandButton>
+				<h:outputText
+					value="#{participantBrowsePageBean.activeTournamentEventLabel}"
+					style="float:center" />
 			</f:facet>
 		</p:toolbar>
 		<p:dataTable
