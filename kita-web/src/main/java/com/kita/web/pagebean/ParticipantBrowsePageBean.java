@@ -17,10 +17,13 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import com.kita.Participant;
+import com.kita.Person;
 import com.kita.TournamentEvent;
 import com.kita.attributes.Forename;
 import com.kita.attributes.Surename;
 import com.kita.orm.I18N;
+import com.kita.web.bridge.PersonBridge;
+import com.kita.web.bridge.PersonBridgeDecorator;
 import com.kita.web.bridge.TournamentEventBridge;
 import com.kita.web.bridge.TournamentEventBridgeDecorator;
 
@@ -34,18 +37,23 @@ public class ParticipantBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = -7684007777613912395L;
 
 	private TournamentEventBridge tournamentEventBridge;
+	private PersonBridge personBridge;
 
 	private List<Participant> searchResult = new ArrayList<>();
+	private List<Person> persons = new ArrayList<>();
 
 	private List<Participant> selectedParticipants;
+	private List<Person> selectedPersons;
 
 	public ParticipantBrowsePageBean() {
 		tournamentEventBridge = TournamentEventBridgeDecorator.newInstance();
+		personBridge = PersonBridgeDecorator.newInstance();
 	}
 
 	@PostConstruct
 	public void init() {
 		refreshParticipants();
+		refreshPersons();
 	}
 
 	void refreshParticipants() {
@@ -56,8 +64,16 @@ public class ParticipantBrowsePageBean implements Serializable {
 		}
 	}
 
+	void refreshPersons() {
+		persons = new ArrayList<>(getPersonBridge().all());
+	}
+
 	private TournamentEventBridge getTournamentEventBridge() {
 		return tournamentEventBridge;
+	}
+
+	private PersonBridge getPersonBridge() {
+		return personBridge;
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
@@ -65,7 +81,7 @@ public class ParticipantBrowsePageBean implements Serializable {
 		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
 	}
 
-	public void edit(@SuppressWarnings("unused") ActionEvent actionEvent) {
+	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
 		//		if (isRowSelectedForOneRow()) {
 		//			UUID uuid = getSelectedParticipant().getUuid();
 		//			getAddParticipantPageBean().openDialogFor(uuid);
@@ -97,6 +113,18 @@ public class ParticipantBrowsePageBean implements Serializable {
 
 	public void setSelectedParticipants(List<Participant> someSelectedParticipants) {
 		selectedParticipants = someSelectedParticipants;
+	}
+
+	public List<Person> getPersons() {
+		return persons;
+	}
+
+	public List<Person> getSelectedPersons() {
+		return selectedPersons;
+	}
+
+	public void setSelectedPersons(List<Person> someSelectedPersons) {
+		selectedPersons = someSelectedPersons;
 	}
 
 	public int sortByForename(Forename name1, Forename name2) {

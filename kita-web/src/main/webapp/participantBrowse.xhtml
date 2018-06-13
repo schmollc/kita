@@ -12,75 +12,130 @@
 <h:body>
 	<h:form id="form">
 		<p:growl
-			id="growl"
+			id="messages"
 			showDetail="true" />
+			
+		<p:layout fullPage="true">
 
-		<div class="divStartHeader"/>
-		<p:toolbar>
-			<f:facet name="left">
+			<p:layoutUnit
+				position="west"
+				resizable="false"
+				size="45%">
+				<p:dataTable
+					var="person"
+					widgetVar="personTable"
+					id="personTable"
+					selectionMode="multiple"
+					value="#{participantBrowsePageBean.persons}"
+					selection="#{participantBrowsePageBean.selectedPersons}"
+					scrollable="true"
+					scrollHeight="500"
+					sortBy="#{person.surename.toString()}"
+					rowKey="#{person.uuid}"
+					resizableColumns="true">
+					<f:facet name="header">
+			        	In total there are #{participantBrowsePageBean.getNumberOfResults()} persons.
+						<p:outputPanel>
+							<h:outputText value="&nbsp;" />
+						</p:outputPanel>
+					</f:facet>
+		
+					<p:column
+						headerText="Forename"
+						filterBy="#{person.forename}"
+						sortBy="#{person.forename}"
+						sortFunction="#{participantBrowsePageBean.sortByForename}"
+						width="50%">
+						<h:outputText value="#{person.forename}" />
+					</p:column>
+		
+					<p:column
+						headerText="Surename"
+						filterBy="#{person.surename}"
+						sortBy="#{person.surename}"
+						sortFunction="#{participantBrowsePageBean.sortBySurename}"
+						width="50%">
+						<h:outputText value="#{person.surename}" />
+					</p:column>
+				</p:dataTable>
+			</p:layoutUnit>
+			
+			<p:layoutUnit
+				position="center"
+				size="5%">
+
 				<p:commandButton
-					actionListener="#{participantBrowsePageBean.add}"
-					icon="ui-icon-plus"
-					update="participantTable">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{participantBrowsePageBean.onEditClosed}"
-						update="form" />
+					value="add"
+					style="width:95%"
+					update="participantTable messages"
+					icon="ui-icon-circle-triangle-w"
+					actionListener="#{participantBrowsePageBean.add}">
 				</p:commandButton>
+
 				<p:commandButton
-					update="form"
-					actionListener="#{participantBrowsePageBean.edit}"
-					icon="ui-icon-pencil">
-					<p:ajax
-						event="dialogReturn"
-						listener="#{participantBrowsePageBean.onEditClosed}"
-						update="form" />
+					value="remove"
+					style="width:95%"
+					update="participantTable messages"
+					icon="ui-icon-circle-triangle-e"
+					actionListener="#{participantBrowsePageBean.remove}">
 				</p:commandButton>
-				<h:outputText
-					value="#{participantBrowsePageBean.activeTournamentEventLabel}"
-					style="float:center" />
-			</f:facet>
-		</p:toolbar>
-		<p:dataTable
-			var="participant"
-			widgetVar="participantTable"
-			id="participantTable"
-			selectionMode="multiple"
-			value="#{participantBrowsePageBean.participants}"
-			selection="#{participantBrowsePageBean.selectedParticipants}"
-			scrollable="true"
-			scrollHeight="500"
-			sortBy="#{participant.surename.toString()}"
-			rowKey="#{participant.uuid}"
-			resizableColumns="true">
-			<f:facet name="header">
-	        	In total there are #{participantBrowsePageBean.getNumberOfResults()} participants.
-				<p:outputPanel>
-					<h:outputText value="&nbsp;" />
-				</p:outputPanel>
-			</f:facet>
+			</p:layoutUnit>
 
-			<p:column
-				headerText="Forename"
-				filterBy="#{participant.forename}"
-				sortBy="#{participant.forename}"
-				sortFunction="#{participantBrowsePageBean.sortByForename}"
-				width="50%">
-				<h:outputText value="#{participant.forename}" />
-			</p:column>
+			<p:layoutUnit
+				position="east"
+				size="45%">
+				<p:toolbar 
+					id="toolbarEast">
+					<f:facet name="right">
+						<h:outputText
+							value="#{participantBrowsePageBean.activeTournamentEventLabel}"
+							style="float:center" />
+					</f:facet>
+				</p:toolbar>
 
-			<p:column
-				headerText="Surename"
-				filterBy="#{participant.surename}"
-				sortBy="#{participant.surename}"
-				sortFunction="#{participantBrowsePageBean.sortBySurename}"
-				width="50%">
-				<h:outputText value="#{participant.surename}" />
-			</p:column>
-		</p:dataTable>
+					<p:dataTable
+					var="participant"
+					widgetVar="participantTable"
+					id="participantTable"
+					selectionMode="multiple"
+					value="#{participantBrowsePageBean.participants}"
+					selection="#{participantBrowsePageBean.selectedParticipants}"
+					scrollable="true"
+					scrollHeight="500"
+					sortBy="#{participant.surename.toString()}"
+					rowKey="#{participant.uuid}"
+					resizableColumns="true">
+					<f:facet name="header">
+			        	In total there are #{participantBrowsePageBean.getNumberOfResults()} participants.
+						<p:outputPanel>
+							<h:outputText value="&nbsp;" />
+						</p:outputPanel>
+					</f:facet>
+		
+					<p:column
+						headerText="Forename"
+						filterBy="#{participant.forename}"
+						sortBy="#{participant.forename}"
+						sortFunction="#{participantBrowsePageBean.sortByForename}"
+						width="50%">
+						<h:outputText value="#{participant.forename}" />
+					</p:column>
+		
+					<p:column
+						headerText="Surename"
+						filterBy="#{participant.surename}"
+						sortBy="#{participant.surename}"
+						sortFunction="#{participantBrowsePageBean.sortBySurename}"
+						width="50%">
+						<h:outputText value="#{participant.surename}" />
+					</p:column>
+				</p:dataTable>
+		
+			</p:layoutUnit>		
+
+		</p:layout>
 
 		<ui:include src="/dock.xhtml" />
-
 	</h:form>
 </h:body>
 </html>
