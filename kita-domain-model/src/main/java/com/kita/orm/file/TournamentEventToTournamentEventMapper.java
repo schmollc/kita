@@ -1,7 +1,10 @@
 package com.kita.orm.file;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.kita.Participant;
 import com.kita.TournamentEvent;
 
 /**
@@ -30,5 +33,20 @@ public class TournamentEventToTournamentEventMapper implements Serializable {
 		target.setDay(source.getDay());
 		target.setName(source.getName());
 		target.setActive(source.isActive());
+
+		List<Participant> allParticipant = new ArrayList<>();
+
+		for (Participant each : target.getParticipants()) {
+			allParticipant.add(each);
+		}
+
+		for (Participant each : allParticipant) {
+			target.removeParticipant(each);
+		}
+
+		for (Participant each : source.getParticipants()) {
+			target.addParticipant(each);
+		}
+
 	}
 }

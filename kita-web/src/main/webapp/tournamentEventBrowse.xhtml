@@ -9,6 +9,9 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:head>
+	<link
+		rel="stylesheet"
+		href="./styles/kita.css"></link>
 </h:head>
 <h:body>
 	<h:form id="form">
@@ -40,8 +43,11 @@
 				<p:commandButton
 					actionListener="#{tournamentEventBrowsePageBean.setActive}"
 					icon="ui-icon-pin-s"
-					update="messagesTournamentEventBrowse">
+					update="form">
 				</p:commandButton>
+				<h:outputText
+					value="#{tournamentEventBrowsePageBean.activeTournamentEventLabel}"
+					style="float:center" />
 			</f:facet>
 		</p:toolbar>
 		<p:dataTable
