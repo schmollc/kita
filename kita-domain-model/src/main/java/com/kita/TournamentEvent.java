@@ -84,10 +84,6 @@ public class TournamentEvent implements Serializable {
 		participants.remove(aParticipant);
 	}
 
-	public boolean hasParticipants() {
-		return !participants.isEmpty();
-	}
-
 	public Collection<Participant> getParticipants() {
 		return Collections.unmodifiableCollection(participants);
 	}
