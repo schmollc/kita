@@ -150,6 +150,24 @@ public class TournamentEventTest {
 	}
 
 	@Test
+	public void testHasParticipants_ForNoParticipantsExist() {
+
+		boolean condition = sut.hasParticipants();
+
+		assertFalse("[hasParticipants] not correct!", condition);
+	}
+
+	@Test
+	public void testHasParticipants_ForParticipants() {
+		Participant participant = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
+		sut.addParticipant(participant);
+
+		boolean condition = sut.hasParticipants();
+
+		assertTrue("[hasParticipants] not correct!", condition);
+	}
+
+	@Test
 	public void testSetUuid() {
 		Eventname eventNameDummy = Eventname.newInstance();
 		EventDay eventDayDummy = EventDay.newInstance(LocalDate.of(2017, Month.APRIL, 30));
