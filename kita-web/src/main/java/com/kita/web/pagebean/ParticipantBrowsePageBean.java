@@ -36,14 +36,18 @@ import com.kita.web.bridge.TournamentEventBridgeDecorator;
 public class ParticipantBrowsePageBean implements Serializable {
 	private static final long serialVersionUID = -7684007777613912395L;
 
-	private TournamentEventBridge tournamentEventBridge;
-	private PersonBridge personBridge;
+	private TournamentEventBridge tournamentEventBridge = null;
+	private PersonBridge personBridge = null;
 
 	private List<Participant> searchResult = new ArrayList<>();
 	private List<Person> persons = new ArrayList<>();
 
-	private List<Participant> selectedParticipants;
-	private List<Person> selectedPersons;
+	private List<Participant> selectedParticipants = new ArrayList<>();
+	private List<Person> selectedPersons = new ArrayList<>();
+
+	// TODO -small- Diskutieren. Sollte es "ActiveTournamentEvent" oder nur TournamentEvent heissen?
+	// Spielt es an dieser Stelle eine Rolle das es sich um das aktive handelt?
+	private TournamentEvent activeTournamentEvent = null;
 
 	public ParticipantBrowsePageBean() {
 		tournamentEventBridge = TournamentEventBridgeDecorator.newInstance();
@@ -52,16 +56,13 @@ public class ParticipantBrowsePageBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		setActiveTournamentEvent();
 		refreshParticipants();
 		refreshPersons();
 	}
 
 	void refreshParticipants() {
-		// TODO - medium- Eigentlich moechte ich hier nicht rumfragen muessen... ggf leeren Tournament?
-		Optional<TournamentEvent> tournemantEvent = getTournamentEventBridge().getActive();
-		if (tournemantEvent.isPresent()) {
-			searchResult = new ArrayList<>(tournemantEvent.get().getParticipants());
-		}
+		searchResult = new ArrayList<>(getActiveTournamentEvent().getParticipants());
 	}
 
 	void refreshPersons() {
@@ -77,8 +78,30 @@ public class ParticipantBrowsePageBean implements Serializable {
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		//		getAddParticipantPageBean().openDialogForAddParticipant(workingEvent);
-		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
+		List<Person> someSelectedPersons = getSelectedPersons();
+		for (Person each : someSelectedPersons) {
+			Participant participant = Participant.newInstance(each.getForename(), each.getSurename());
+			getActiveTournamentEvent().addParticipant(participant);
+			persistChange();
+		}
+		refreshParticipants();
+		refreshPersons();
+
+	}
+
+	private void persistChange() {
+		getTournamentEventBridge().set(getActiveTournamentEvent());
+	}
+
+	private void setActiveTournamentEvent() {
+		Optional<TournamentEvent> tournamentEvent = getTournamentEventBridge().getActive();
+		if (tournamentEvent.isPresent()) {
+			activeTournamentEvent = tournamentEvent.get();
+		}
+	}
+
+	private TournamentEvent getActiveTournamentEvent() {
+		return activeTournamentEvent;
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {

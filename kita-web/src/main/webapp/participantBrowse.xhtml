@@ -67,17 +67,17 @@
 				<p:commandButton
 					value="add"
 					style="width:95%"
-					update="participantTable messages"
 					icon="ui-icon-circle-triangle-e"
-					actionListener="#{participantBrowsePageBean.add}">
+					actionListener="#{participantBrowsePageBean.add}"
+					update="personTable participantTable messages">
 				</p:commandButton>
 
 				<p:commandButton
 					value="remove"
 					style="width:95%"
-					update="participantTable messages"
 					icon="ui-icon-circle-triangle-w"
-					actionListener="#{participantBrowsePageBean.remove}">
+					actionListener="#{participantBrowsePageBean.remove}"
+					update="personTable participantTable messages">
 				</p:commandButton>
 			</p:layoutUnit>
 
