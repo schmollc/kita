@@ -61,6 +61,13 @@ public class ParticipantBrowsePageBean implements Serializable {
 		refreshPersons();
 	}
 
+	private void setActiveTournamentEvent() {
+		Optional<TournamentEvent> tournamentEvent = getTournamentEventBridge().getActive();
+		if (tournamentEvent.isPresent()) {
+			activeTournamentEvent = tournamentEvent.get();
+		}
+	}
+
 	void refreshParticipants() {
 		searchResult = new ArrayList<>(getActiveTournamentEvent().getParticipants());
 	}
@@ -78,30 +85,30 @@ public class ParticipantBrowsePageBean implements Serializable {
 	}
 
 	public void add(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		List<Person> someSelectedPersons = getSelectedPersons();
-		for (Person each : someSelectedPersons) {
-			Participant participant = Participant.newInstance(each.getForename(), each.getSurename());
-			getActiveTournamentEvent().addParticipant(participant);
-			persistChange();
+		if (!isPersonRowSelected()) {
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PERSON);
+		} else {
+			List<Person> someSelectedPersons = getSelectedPersons();
+			for (Person each : someSelectedPersons) {
+				Participant participant = Participant.newInstance(each.getForename(), each.getSurename());
+				getActiveTournamentEvent().addParticipant(participant);
+				persistChange();
+			}
+			refreshParticipants();
+			refreshPersons();
 		}
-		refreshParticipants();
-		refreshPersons();
-
 	}
 
-	private void persistChange() {
-		getTournamentEventBridge().set(getActiveTournamentEvent());
-	}
-
-	private void setActiveTournamentEvent() {
-		Optional<TournamentEvent> tournamentEvent = getTournamentEventBridge().getActive();
-		if (tournamentEvent.isPresent()) {
-			activeTournamentEvent = tournamentEvent.get();
-		}
+	private boolean isPersonRowSelected() {
+		return getSelectedPersons() != null && !getSelectedPersons().isEmpty();
 	}
 
 	private TournamentEvent getActiveTournamentEvent() {
 		return activeTournamentEvent;
+	}
+
+	private void persistChange() {
+		getTournamentEventBridge().set(getActiveTournamentEvent());
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
