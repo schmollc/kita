@@ -14,6 +14,7 @@ import org.junit.runners.MethodSorters;
 
 import com.kita.attributes.EventDay;
 import com.kita.attributes.Eventname;
+import com.kita.attributes.TournamentStatus;
 
 /**
  * Keine Straße ist zu lang mit einem Test an der Seite.
@@ -96,6 +97,37 @@ public class TournamentEventTest {
 		boolean actual = sut.isActive();
 
 		assertEquals("[active] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testStatus_ForDefault() {
+		TournamentStatus expected = TournamentStatus.OPEN;
+
+		TournamentStatus actual = sut.getStatus();
+
+		assertEquals("[status] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testStatus_ForRunning() {
+		TournamentStatus expected = TournamentStatus.RUNNING;
+
+		sut.start();
+
+		TournamentStatus actual = sut.getStatus();
+
+		assertEquals("[status] not correct!", expected, actual);
+	}
+
+	@Test
+	public void testStatus_ForClosed() {
+		TournamentStatus expected = TournamentStatus.CLOSED;
+
+		sut.close();
+
+		TournamentStatus actual = sut.getStatus();
+
+		assertEquals("[status] not correct!", expected, actual);
 	}
 
 	@Test
