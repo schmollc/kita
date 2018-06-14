@@ -88,8 +88,7 @@ public class ParticipantBrowsePageBean implements Serializable {
 		if (!isPersonRowSelected()) {
 			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PERSON);
 		} else {
-			List<Person> someSelectedPersons = getSelectedPersons();
-			for (Person each : someSelectedPersons) {
+			for (Person each : getSelectedPersons()) {
 				Participant participant = Participant.newInstance(each.getForename(), each.getSurename());
 				getActiveTournamentEvent().addParticipant(participant);
 				persistChange();
@@ -112,13 +111,20 @@ public class ParticipantBrowsePageBean implements Serializable {
 	}
 
 	public void remove(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		//		if (isRowSelectedForOneRow()) {
-		//			UUID uuid = getSelectedParticipant().getUuid();
-		//			getAddParticipantPageBean().openDialogFor(uuid);
-		//		} else {
-		//			showMessageErrorNoRowSelected();
-		//		}
-		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
+		if (!isParticipantRowSelected()) {
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PARTICIPANT);
+		} else {
+			for (Participant each : getSelectedParticipants()) {
+				getActiveTournamentEvent().removeParticipant(each);
+				persistChange();
+			}
+			refreshParticipants();
+			refreshPersons();
+		}
+	}
+
+	private boolean isParticipantRowSelected() {
+		return getSelectedParticipants() != null && !getSelectedParticipants().isEmpty();
 	}
 
 	public String getActiveTournamentEventLabel() {
