@@ -45,7 +45,7 @@ public class ParticipantBrowsePageBean implements Serializable {
 	private List<Participant> selectedParticipants = new ArrayList<>();
 	private List<Person> selectedPersons = new ArrayList<>();
 
-	// TODO -small- Diskutieren. Sollte es "ActiveTournamentEvent" oder nur TournamentEvent heissen?
+	// TODO -small- Diskutieren: Sollte es "ActiveTournamentEvent" oder nur TournamentEvent heissen?
 	// Spielt es an dieser Stelle eine Rolle das es sich um das aktive handelt?
 	private TournamentEvent activeTournamentEvent = null;
 
@@ -58,7 +58,7 @@ public class ParticipantBrowsePageBean implements Serializable {
 	public void init() {
 		setActiveTournamentEvent();
 		refreshParticipants();
-		refreshPersons();
+		initPersons();
 	}
 
 	private void setActiveTournamentEvent() {
@@ -72,7 +72,11 @@ public class ParticipantBrowsePageBean implements Serializable {
 		searchResult = new ArrayList<>(getActiveTournamentEvent().getParticipants());
 	}
 
-	void refreshPersons() {
+	void initPersons() {
+		// TODO -small- Diskutieren: Wo sollte man das abgleichen der beiden Listen machen....
+		// Wir möchten gerne alle Personen, die schon Participant sind NICHT mehr in der Personen liste sehen
+		// Wenn wir das hier machen haben wir ja eigentlich Anwendungslogik in der PageBean
+		// Oder wäre das ein einfacher Lambda Filter?
 		persons = new ArrayList<>(getPersonBridge().all());
 	}
 
@@ -89,13 +93,17 @@ public class ParticipantBrowsePageBean implements Serializable {
 			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.SELECT_A_PERSON);
 		} else {
 			for (Person each : getSelectedPersons()) {
-				Participant participant = Participant.newInstance(each.getForename(), each.getSurename());
+				Participant participant = Participant.newInstance(each.getForename(), each.getSurename(), each.getUuid());
 				getActiveTournamentEvent().addParticipant(participant);
 				persistChange();
+				removePersonFromResultList(each);
 			}
 			refreshParticipants();
-			refreshPersons();
 		}
+	}
+
+	private void removePersonFromResultList(Person each) {
+		persons.remove(each);
 	}
 
 	private boolean isPersonRowSelected() {
@@ -117,10 +125,15 @@ public class ParticipantBrowsePageBean implements Serializable {
 			for (Participant each : getSelectedParticipants()) {
 				getActiveTournamentEvent().removeParticipant(each);
 				persistChange();
+				addCorrespondingPersonToResultList(each);
 			}
 			refreshParticipants();
-			refreshPersons();
 		}
+	}
+
+	private void addCorrespondingPersonToResultList(Participant participant) {
+		Person person = getPersonBridge().get(participant.getUuidPerson());
+		persons.add(person);
 	}
 
 	private boolean isParticipantRowSelected() {

@@ -14,6 +14,7 @@ public class Participant implements Serializable {
 	private static final long serialVersionUID = -4324815928394137004L;
 
 	private UUID uuid;
+	private UUID uuidPerson;
 	private Forename forename = Forename.newInstance();
 	private Surename surename = Surename.newInstance();
 
@@ -21,8 +22,9 @@ public class Participant implements Serializable {
 		uuid = UUID.randomUUID();
 	}
 
-	private Participant(Forename aForename, Surename aSurename) {
+	private Participant(Forename aForename, Surename aSurename, UUID anUuidPerson) {
 		uuid = UUID.randomUUID();
+		uuidPerson = anUuidPerson;
 		forename = aForename;
 		surename = aSurename;
 	}
@@ -31,8 +33,8 @@ public class Participant implements Serializable {
 		return new Participant();
 	}
 
-	public static Participant newInstance(Forename aForename, Surename aSurename) {
-		return new Participant(aForename, aSurename);
+	public static Participant newInstance(Forename aForename, Surename aSurename, UUID anUuidPerson) {
+		return new Participant(aForename, aSurename, anUuidPerson);
 	}
 
 	public UUID getUuid() {
@@ -41,6 +43,14 @@ public class Participant implements Serializable {
 
 	public void setUuid(UUID anUuid) {
 		uuid = anUuid;
+	}
+
+	public void setUuidPerson(UUID anUuidPerson) {
+		uuidPerson = anUuidPerson;
+	}
+
+	public UUID getUuidPerson() {
+		return uuidPerson;
 	}
 
 	public Forename getForename() {

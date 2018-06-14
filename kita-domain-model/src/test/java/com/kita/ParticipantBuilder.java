@@ -1,5 +1,7 @@
 package com.kita;
 
+import java.util.UUID;
+
 import com.kita.attributes.Forename;
 import com.kita.attributes.Surename;
 
@@ -11,6 +13,7 @@ public class ParticipantBuilder {
 
 	private Surename surename = Surename.newInstance("Surename");
 	private Forename forename = Forename.newInstance("Forename");
+	private UUID uuidPerson = UUID.randomUUID();
 
 	public ParticipantBuilder withSurename(Surename aSurename) {
 		surename = aSurename;
@@ -32,9 +35,13 @@ public class ParticipantBuilder {
 		return this;
 	}
 
-	public Participant build() {
+	public ParticipantBuilder withUUIDPerson(UUID anUUID) {
+		uuidPerson = anUUID;
+		return this;
+	}
 
-		Participant participant = Participant.newInstance(forename, surename);
+	public Participant build() {
+		Participant participant = Participant.newInstance(forename, surename, uuidPerson);
 		return participant;
 	}
 }
