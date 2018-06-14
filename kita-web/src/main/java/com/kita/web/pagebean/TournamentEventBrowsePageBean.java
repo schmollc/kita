@@ -3,6 +3,7 @@ package com.kita.web.pagebean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -91,9 +92,9 @@ public class TournamentEventBrowsePageBean implements Serializable {
 	}
 
 	public String getActiveTournamentEventLabel() {
-		TournamentEvent selectedEvent = getSelectedTournamentEvent();
-		if (selectedEvent != null) {
-			return selectedEvent.toString();
+		Optional<TournamentEvent> tournamentEvent = getTournamentEventBridge().getActive();
+		if (tournamentEvent.isPresent()) {
+			return tournamentEvent.get().toString();
 		}
 		return "";
 	}
