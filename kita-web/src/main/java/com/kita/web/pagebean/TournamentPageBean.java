@@ -2,6 +2,7 @@ package com.kita.web.pagebean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import com.kita.Participant;
 import com.kita.Team;
 import com.kita.TournamentEvent;
 import com.kita.attributes.Teamname;
@@ -49,7 +51,15 @@ public class TournamentPageBean implements Serializable {
 	}
 
 	public void start(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		// Shuffle und setzen der Teams
+		teams = tournamentEventBridge.getTeams(getParticipants());
+	}
+
+	private List<Participant> getParticipants() {
+		Optional<TournamentEvent> tournamentEvent = getTournamentEventBridge().getActive();
+		if (tournamentEvent.isPresent()) {
+			return new ArrayList(tournamentEvent.get().getParticipants());
+		}
+		return Collections.emptyList();
 	}
 
 	void showMessage(Severity severity, String summary, String textMessage) {

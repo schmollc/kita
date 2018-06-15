@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.kita.Participant;
+import com.kita.Team;
 import com.kita.TournamentEvent;
 import com.kita.services.TournamentEventService;
 
@@ -73,5 +75,10 @@ public class TournamentEventBridgeDecorator implements Serializable, TournamentE
 	private void activateActualTournament(TournamentEvent aTournamentEvent) {
 		aTournamentEvent.setActive(true);
 		set(aTournamentEvent);
+	}
+
+	@Override
+	public List<Team> getTeams(List<Participant> someParticipants) {
+		return getTournamentEventService().getTeams(someParticipants);
 	}
 }
