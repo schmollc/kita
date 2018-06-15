@@ -72,7 +72,7 @@ public class TournamentEventEditPageBean implements Serializable {
 		closeDialog();
 	}
 
-	void showMessageNotImplementedYet() {
+	private void showMessageNotImplementedYet() {
 		showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.NOT_IMPLEMENTD_YET);
 	}
 

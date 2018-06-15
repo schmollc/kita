@@ -24,4 +24,6 @@ public interface TournamentEventBridge {
 	void setActive(TournamentEvent aSelectedEvent);
 
 	public List<Team> getTeams(List<Participant> someParticipants);
+
+	void startActiveTournament();
 }

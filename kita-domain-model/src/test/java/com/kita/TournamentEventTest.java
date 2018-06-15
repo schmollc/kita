@@ -131,6 +131,22 @@ public class TournamentEventTest {
 	}
 
 	@Test
+	public void testIsOpen_ForOpenTournament() {
+		boolean condition = sut.isOpen();
+
+		assertTrue("[isOpen] not correct!", condition);
+	}
+
+	@Test
+	public void testIsOpen_ForTournamentIsStarted() {
+		sut.start();
+
+		boolean condition = sut.isOpen();
+
+		assertFalse("[isOpen] not correct!", condition);
+	}
+
+	@Test
 	public void testAddParticipant() {
 		Participant participant = new ParticipantBuilder().withForename("Justus").withSurename("Jonas").build();
 

@@ -81,4 +81,11 @@ public class TournamentEventBridgeDecorator implements Serializable, TournamentE
 	public List<Team> getTeams(List<Participant> someParticipants) {
 		return getTournamentEventService().getTeams(someParticipants);
 	}
+
+	@Override
+	public void startActiveTournament() {
+		TournamentEvent tournamentEvent = getActive().get();
+		tournamentEvent.start();
+		set(tournamentEvent);
+	}
 }

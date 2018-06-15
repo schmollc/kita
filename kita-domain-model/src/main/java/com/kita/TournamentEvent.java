@@ -156,4 +156,8 @@ public class TournamentEvent implements Serializable {
 	public TournamentStatus getTournamentStatus() {
 		return status;
 	}
+
+	public boolean isOpen() {
+		return status == TournamentStatus.OPEN;
+	}
 }

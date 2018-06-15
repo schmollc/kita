@@ -17,6 +17,7 @@ import com.kita.Participant;
 import com.kita.Team;
 import com.kita.TournamentEvent;
 import com.kita.attributes.Teamname;
+import com.kita.orm.I18N;
 import com.kita.web.bridge.TournamentEventBridge;
 import com.kita.web.bridge.TournamentEventBridgeDecorator;
 
@@ -51,7 +52,20 @@ public class TournamentPageBean implements Serializable {
 	}
 
 	public void start(@SuppressWarnings("unused") ActionEvent actionEvent) {
-		teams = tournamentEventBridge.getTeams(getParticipants());
+		if (isOpen()) {
+			teams = tournamentEventBridge.getTeams(getParticipants());
+			tournamentEventBridge.startActiveTournament();
+		} else {
+			showMessage(FacesMessage.SEVERITY_ERROR, I18N.NOT_POSSIBLE, I18N.TOURNAMENT_STARTED);
+		}
+	}
+
+	private boolean isOpen() {
+		Optional<TournamentEvent> tournamentEvent = getTournamentEventBridge().getActive();
+		if (tournamentEvent.isPresent()) {
+			return tournamentEvent.get().isOpen();
+		}
+		return false;
 	}
 
 	private List<Participant> getParticipants() {
