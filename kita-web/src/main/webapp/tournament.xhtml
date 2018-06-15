@@ -16,15 +16,46 @@
 <h:body>
 	<h:form id="form">
 		<p:growl
-			id="messagesTournament"
+			id="messages"
 			showDetail="true" />
 
-		<div class="divStartHeader"/>
+		<p:toolbar id="toolbarEast">
+			<f:facet name="right">
+				<h:outputText
+					value="#{tournamentPageBean.activeTournamentEventLabel}"
+					style="float:left" />
+				<p:commandButton
+					actionListener="#{tournamentPageBean.start}"
+					icon="ui-icon-plus"
+					update="teamTable">
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
 
-		Tournament
-		
+		<p:dataTable
+			var="team"
+			widgetVar="teamTable"
+			id="teamTable"
+			selectionMode="single"
+			value="#{tournamentPageBean.teams}"
+			selection="#{tournamentPageBean.selectedTeam}"
+			scrollable="true"
+			scrollHeight="500"
+			sortBy="#{team.name.toString()}"
+			rowKey="#{team.uuid}"
+			resizableColumns="true">
+
+			<p:column
+				headerText="Teamname"
+				filterBy="#{team.name}"
+				sortBy="#{team.name}"
+				sortFunction="#{tournamentPageBean.sortByName}"
+				width="50%">
+				<h:outputText value="#{team.name}" />
+			</p:column>
+		</p:dataTable>
+
 		<ui:include src="/dock.xhtml" />
-
 	</h:form>
 </h:body>
 </html>
