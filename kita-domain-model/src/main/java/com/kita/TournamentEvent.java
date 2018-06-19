@@ -21,6 +21,12 @@ public class TournamentEvent implements Serializable {
 	private Eventname name = Eventname.newInstance();
 	private EventDay day = EventDay.today();
 	private Collection<Participant> participants = new HashSet<>();
+	// TODO -small- Diskutieren: Wenn ich nun noch die Liste mit den Teams hier aufnehme
+	// dann habe ich ja die Participants doppelt drin! Einmal als Participant und einmal als
+	// Team. Mmm.. Müssen wir hier auch nocheinmal den Member einführen? Denn ich kann als Participant
+	// ggf in zwei Teams sein?
+	// Wäre allerdings in diesem Fall nicht wirklich schön... und wenn ja auch nur EIN Sonderfall, da bei ZWEI
+	// Fällen man diese beiden Teams zusammenlegen könnte und somit die beiden Sonderfälle wegfallen werden.
 
 	private boolean active;
 

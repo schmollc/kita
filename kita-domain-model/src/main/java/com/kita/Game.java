@@ -3,12 +3,14 @@ package com.kita;
 import java.io.Serializable;
 import java.util.UUID;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 import com.kita.attributes.Score;
 
 /**
  * @since 15.06.2018
  */
-public class Game implements Serializable {
+public class Game extends DefaultMutableTreeNode implements Serializable {
 	private static final long serialVersionUID = -6643897760864363089L;
 
 	private UUID uuid = null;
@@ -23,6 +25,13 @@ public class Game implements Serializable {
 
 	public static Game newInstance() {
 		return new Game();
+	}
+
+	public static Game newInstance(Team aTeamOne, Team aTeamTwo) {
+		Game game = new Game();
+		game.teamOne = aTeamOne;
+		game.teamTwo = aTeamTwo;
+		return game;
 	}
 
 	public UUID getUuid() {
