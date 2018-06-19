@@ -20,5 +20,6 @@ public final class I18N implements Serializable {
 	public static final String SELECT_A_PARTICIPANT = "Please select a Participant!";
 	public static final String SELECT_A_PERSON		= "Please select a Person!";
 	public static final String SELECT_A_ROW			= "Please select one row!";
+	public static final String TOURNAMENT_STARTED 	= "Tournament already started";
 	// @formatter:on
 }

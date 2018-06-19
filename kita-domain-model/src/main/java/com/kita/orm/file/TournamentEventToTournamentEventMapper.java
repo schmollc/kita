@@ -33,6 +33,7 @@ public class TournamentEventToTournamentEventMapper implements Serializable {
 		target.setDay(source.getDay());
 		target.setName(source.getName());
 		target.setActive(source.isActive());
+		target.setTournamentStatus(source.getTournamentStatus());
 
 		List<Participant> allParticipant = new ArrayList<>();
 
@@ -47,6 +48,5 @@ public class TournamentEventToTournamentEventMapper implements Serializable {
 		for (Participant each : source.getParticipants()) {
 			target.addParticipant(each);
 		}
-
 	}
 }

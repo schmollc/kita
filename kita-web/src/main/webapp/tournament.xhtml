@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<link
+		rel="stylesheet"
+		href="./styles/kita.css"></link>
+</h:head>
+<h:body>
+	<h:form id="form">
+		<p:growl
+			id="messages"
+			showDetail="true" />
+
+		<p:toolbar id="toolbarEast">
+			<f:facet name="right">
+				<h:outputText
+					value="#{tournamentPageBean.activeTournamentEventLabel}"
+					style="float:left" />
+				<p:commandButton
+					actionListener="#{tournamentPageBean.start}"
+					icon="ui-icon-plus"
+					update="teamTable">
+				</p:commandButton>
+			</f:facet>
+		</p:toolbar>
+
+		<p:dataTable
+			var="team"
+			widgetVar="teamTable"
+			id="teamTable"
+			selectionMode="single"
+			value="#{tournamentPageBean.teams}"
+			selection="#{tournamentPageBean.selectedTeam}"
+			scrollable="true"
+			scrollHeight="500"
+			sortBy="#{team.name.toString()}"
+			rowKey="#{team.uuid}"
+			resizableColumns="true">
+
+			<p:column
+				visible="true"
+				toggleable="false"
+				style="width:16px">
+				<p:rowToggler />
+			</p:column>
+
+			<p:column
+				headerText="Teamname"
+				filterBy="#{team.name}"
+				sortBy="#{team.name}"
+				sortFunction="#{tournamentPageBean.sortByName}"
+				width="90%">
+				<h:outputText value="#{team.name}" />
+			</p:column>
+			<p:rowExpansion>
+				<p:panelGrid
+					columns="2"
+					columnClasses="label,value"
+					style="width:500px">
+
+					<h:outputText value="First Participant" />
+					<h:outputText value="#{team.firstParticipant}" />
+
+					<h:outputText value="Second Participant" />
+					<h:outputText value="#{team.secondParticipant}" />
+
+				</p:panelGrid>
+			</p:rowExpansion>
+		</p:dataTable>
+
+		<ui:include src="/dock.xhtml" />
+	</h:form>
+</h:body>
+</html>

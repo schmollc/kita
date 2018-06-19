@@ -78,6 +78,11 @@ public class ParticipantBrowsePageBean implements Serializable {
 		// Wenn wir das hier machen haben wir ja eigentlich Anwendungslogik in der PageBean
 		// Oder wäre das ein einfacher Lambda Filter?
 		persons = new ArrayList<>(getPersonBridge().all());
+
+		for (Participant each : getActiveTournamentEvent().getParticipants()) {
+			Person person = getPersonBridge().get(each.getUuidPerson());
+			persons.remove(person);
+		}
 	}
 
 	private TournamentEventBridge getTournamentEventBridge() {

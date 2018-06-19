@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import com.kita.attributes.EventDay;
 import com.kita.attributes.Eventname;
+import com.kita.attributes.TournamentStatus;
 
 /**
  * @since 13.05.2018
@@ -20,8 +21,16 @@ public class TournamentEvent implements Serializable {
 	private Eventname name = Eventname.newInstance();
 	private EventDay day = EventDay.today();
 	private Collection<Participant> participants = new HashSet<>();
+	// TODO -small- Diskutieren: Wenn ich nun noch die Liste mit den Teams hier aufnehme
+	// dann habe ich ja die Participants doppelt drin! Einmal als Participant und einmal als
+	// Team. Mmm.. Müssen wir hier auch nocheinmal den Member einführen? Denn ich kann als Participant
+	// ggf in zwei Teams sein?
+	// Wäre allerdings in diesem Fall nicht wirklich schön... und wenn ja auch nur EIN Sonderfall, da bei ZWEI
+	// Fällen man diese beiden Teams zusammenlegen könnte und somit die beiden Sonderfälle wegfallen werden.
 
 	private boolean active;
+
+	private TournamentStatus status = TournamentStatus.OPEN;
 
 	private TournamentEvent() {
 		uuid = UUID.randomUUID();
@@ -76,6 +85,18 @@ public class TournamentEvent implements Serializable {
 		return active;
 	}
 
+	public TournamentStatus getStatus() {
+		return status;
+	}
+
+	public void start() {
+		status = TournamentStatus.RUNNING;
+	}
+
+	public void close() {
+		status = TournamentStatus.CLOSED;
+	}
+
 	public void addParticipant(Participant aParticipant) {
 		participants.add(aParticipant);
 	}
@@ -121,5 +142,28 @@ public class TournamentEvent implements Serializable {
 	@Override
 	public String toString() {
 		return name + ", " + day;
+	}
+
+	/**
+	 * TODO -small- Diskussion: Ich möchte eigentlich die Logik mit dem Status gerne über die Methoden
+	 * start/close abbilden. Es soll also kein Getter geben.
+	 * Wenn ich allerdings persistiere benötige ich allerdings zugriff auf die Werte um target->source machen zu können
+	 *
+	 * Eine Idee: Der Mapper ist im gleichen package und das Attribut ist package Protected
+	 * Oder mal ganz was anderes: TournamentPOJO hat "nur" dumme Attribute und getter/setter.
+	 * Dieses wird ins TournamentEvent Domain Objekt mit genau einem get/set gepackt .
+	 * Das Tournemant Domain Objekt dient dann als Decorator nach aussen....
+	 *
+	 */
+	public void setTournamentStatus(TournamentStatus aStatus) {
+		status = aStatus;
+	}
+
+	public TournamentStatus getTournamentStatus() {
+		return status;
+	}
+
+	public boolean isOpen() {
+		return status == TournamentStatus.OPEN;
 	}
 }

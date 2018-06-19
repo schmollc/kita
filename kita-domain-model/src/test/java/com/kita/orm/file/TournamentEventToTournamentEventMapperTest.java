@@ -11,6 +11,7 @@ import org.junit.runners.MethodSorters;
 import com.kita.TournamentEvent;
 import com.kita.attributes.EventDay;
 import com.kita.attributes.Eventname;
+import com.kita.attributes.TournamentStatus;
 
 /**
  *  1. Testen beginnt mit Respekt und endet mit Respekt.
@@ -81,6 +82,17 @@ public class TournamentEventToTournamentEventMapperTest {
 
 		boolean actual = target.isActive();
 		assertEquals("Mapping of [active] is not correct!", expected, actual);
+	}
+
+	@Test
+	public void testMapTournamentEventToTournamentEvent_WithTournamentStatus() {
+		TournamentStatus expected = TournamentStatus.CLOSED;
+		source.setTournamentStatus(expected);
+
+		sut.mapTournamentEventToTournamentEvent(source, target);
+
+		TournamentStatus actual = target.getTournamentStatus();
+		assertEquals("Mapping of [tournamentStatus] is not correct!", expected, actual);
 	}
 
 }
