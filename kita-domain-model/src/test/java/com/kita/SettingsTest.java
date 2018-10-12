@@ -49,7 +49,7 @@ public class SettingsTest {
 
 	@Test
 	public void testTheme_ForInitialSut() {
-		String expected = "afterdark";
+		String expected = "glass-x";
 
 		String actual = sut.getTheme();
 

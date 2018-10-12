@@ -13,7 +13,7 @@ public class Settings implements Serializable {
 
 	private static GatewayType gatewayType = GatewayType.MEMORY;
 
-	private String theme = "afterdark";
+	private String theme = "glass-x";
 
 	private Settings() {
 		super();
