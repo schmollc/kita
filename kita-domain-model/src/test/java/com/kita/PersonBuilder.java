@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
-import com.kita.attributes.Kampfname;
+import com.kita.attributes.Nickname;
 import com.kita.attributes.Surename;
 
 /**
@@ -16,7 +16,8 @@ public class PersonBuilder {
 	private UUID uuid = UUID.randomUUID();
 	private Surename surename = Surename.newInstance("Surename");
 	private Forename forename = Forename.newInstance("Forename");
-	private Kampfname kampfname = Kampfname.newInstance("Kampfname");
+	private Nickname nickname = Nickname.newInstance("Nickname");
+		
 	private Email email = Email.newInstance("Email@google.com");
 
 	public PersonBuilder withUuid(UUID anUuid) {
@@ -34,8 +35,8 @@ public class PersonBuilder {
 		return this;
 	}
 
-	public PersonBuilder withKampfname(Kampfname aKampfname) {
-		kampfname = aKampfname;
+	public PersonBuilder withNickname(Nickname aNickname) {
+		nickname = aNickname;
 		return this;
 	}
 
@@ -56,7 +57,7 @@ public class PersonBuilder {
 		person.setEmail(email);
 		person.setSurename(surename);
 		person.setForename(forename);
-		person.setKampfname(kampfname);
+		person.setNickname(nickname);
 		return person;
 	}
 }

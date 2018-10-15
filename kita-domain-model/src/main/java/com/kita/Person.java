@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
-import com.kita.attributes.Kampfname;
+import com.kita.attributes.Nickname;
 import com.kita.attributes.Surename;
 
 /**
@@ -19,7 +19,7 @@ public class Person implements Serializable {
 	private Forename forename = Forename.newInstance();
 	private UUID uuid;
 
-	private Kampfname kampfname;
+	private Nickname nickname;
 
 	private Email email;
 
@@ -63,16 +63,16 @@ public class Person implements Serializable {
 		return surename;
 	}
 
-	public void setKampfname(Kampfname aKampfname) {
-		if (aKampfname == null) {
-			kampfname = Kampfname.newInstance();
+	public void setNickname(Nickname aNickname) {
+		if (aNickname == null) {
+			nickname = Nickname.newInstance();
 		} else {
-			kampfname = aKampfname;
+			nickname = aNickname;
 		}
 	}
 
-	public Kampfname getKampfname() {
-		return kampfname;
+	public Nickname getNickname() {
+		return nickname;
 	}
 
 	public Email getEmail() {
@@ -96,7 +96,7 @@ public class Person implements Serializable {
 
 	@Override
 	public String toString() {
-		return getForename() + " " + getSurename() + " - " + getKampfname();
+		return getNickname() + " [" + getForename() + " " + getSurename() + "]";
 	}
 
 	@Override

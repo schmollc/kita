@@ -1,6 +1,7 @@
 package com.kita.orm.file;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -11,7 +12,7 @@ import org.junit.runners.MethodSorters;
 import com.kita.Person;
 import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
-import com.kita.attributes.Kampfname;
+import com.kita.attributes.Nickname;
 import com.kita.attributes.Surename;
 
 /**
@@ -82,14 +83,14 @@ public class PersonToPersonMapperTest {
 	}
 
 	@Test
-	public void testMapPersonToPerson_Kampfname() {
-		Kampfname expected = Kampfname.newInstance("Lokomotive C&A");
-		source.setKampfname(expected);
+	public void testMapPersonToPerson_Nickname() {
+		Nickname expected = Nickname.newInstance("Lokomotive C&A");
+		source.setNickname(expected);
 
 		sut.mapPersonToPerson(source, target);
 
-		Kampfname actual = target.getKampfname();
-		assertEquals("Mapping of [kampfname] is not correct!", expected, actual);
+		Nickname actual = target.getNickname();
+		assertEquals("Mapping of [nickname] is not correct!", expected, actual);
 	}
 
 	@Test

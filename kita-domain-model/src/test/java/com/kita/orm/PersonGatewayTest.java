@@ -1,6 +1,8 @@
 package com.kita.orm;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +13,7 @@ import org.junit.runners.MethodSorters;
 
 import com.kita.Person;
 import com.kita.attributes.Forename;
-import com.kita.attributes.Kampfname;
+import com.kita.attributes.Nickname;
 import com.kita.attributes.Surename;
 
 /**
@@ -88,8 +90,8 @@ public abstract class PersonGatewayTest {
 		updatePerson.setForename(newForename);
 		Surename newSurename = Surename.newInstance("Andrews");
 		updatePerson.setSurename(newSurename);
-		Kampfname newKampfname = Kampfname.newInstance("Goalkeeper");
-		updatePerson.setKampfname(newKampfname);
+		Nickname newNickname = Nickname.newInstance("Goalkeeper");
+		updatePerson.setNickname(newNickname);
 
 		// ACT
 		getSut().set(updatePerson);
@@ -100,7 +102,7 @@ public abstract class PersonGatewayTest {
 
 		assertEquals("[Forename] not correct.", newForename, checkPerson.getForename());
 		assertEquals("[Surename] not correct.", newSurename, checkPerson.getSurename());
-		assertEquals("[Kampfname] not correct.", newKampfname, checkPerson.getKampfname());
+		assertEquals("[Nickname] not correct.", newNickname, checkPerson.getNickname());
 
 	}
 
@@ -112,12 +114,12 @@ public abstract class PersonGatewayTest {
 		return createPerson("Peter", "Shaw", "Zweiter Detektiv");
 	}
 
-	private Person createPerson(String forename, String surename, String kampfname) {
+	private Person createPerson(String forename, String surename, String nickname) {
 		Person person = Person.newInstance();
 
 		person.setForename(Forename.newInstance(forename));
 		person.setSurename(Surename.newInstance(surename));
-		person.setKampfname(Kampfname.newInstance(kampfname));
+		person.setNickname(Nickname.newInstance(nickname));
 
 		return person;
 	}

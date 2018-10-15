@@ -1,6 +1,9 @@
 package com.kita;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -11,7 +14,7 @@ import org.junit.runners.MethodSorters;
 
 import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
-import com.kita.attributes.Kampfname;
+import com.kita.attributes.Nickname;
 import com.kita.attributes.Surename;
 
 /**
@@ -77,14 +80,14 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testKampfname() {
+	public void testNickname() {
 		Person sut = Person.newInstance();
-		Kampfname expected = Kampfname.newInstance("Lokomotive C&A");
+		Nickname expected = Nickname.newInstance("Torkoenig");
 
-		sut.setKampfname(expected);
+		sut.setNickname(expected);
 
-		Kampfname actual = sut.getKampfname();
-		assertEquals("[kampfname] not correct!", expected, actual);
+		Nickname actual = sut.getNickname();
+		assertEquals("[Nickname] not correct!", expected, actual);
 	}
 
 	@Test
@@ -119,13 +122,13 @@ public class PersonTest {
 	}
 
 	@Test
-	public void testSetKampfname_ForNullValue() {
+	public void testSetNickname_ForNullValue() {
 		Person sut = Person.newInstance();
 
-		sut.setKampfname(null);
+		sut.setNickname(null);
 
-		Kampfname actual = sut.getKampfname();
-		assertNotNull("Person must not return [kampfname] equals 'null'!", actual);
+		Nickname actual = sut.getNickname();
+		assertNotNull("Person must not return [nickname] equals 'null'!", actual);
 	}
 
 	@Test
@@ -164,11 +167,11 @@ public class PersonTest {
 
 		sut.setForename(Forename.newInstance("Justus"));
 		sut.setSurename(Surename.newInstance("Jonas"));
-		sut.setKampfname(Kampfname.newInstance("Lokomotive C&A"));
+		sut.setNickname(Nickname.newInstance("Torkoenig"));
 
 		String actual = sut.toString();
 
-		String expected = "Justus Jonas - Lokomotive C&A";
+		String expected = "Torkoenig [Justus Jonas]";
 		assertEquals("[toString] not correct!", expected, actual);
 	}
 

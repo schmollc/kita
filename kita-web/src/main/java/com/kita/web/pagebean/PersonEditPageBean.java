@@ -14,7 +14,7 @@ import org.primefaces.context.RequestContext;
 import com.kita.Person;
 import com.kita.attributes.Email;
 import com.kita.attributes.Forename;
-import com.kita.attributes.Kampfname;
+import com.kita.attributes.Nickname;
 import com.kita.attributes.Surename;
 import com.kita.orm.I18N;
 import com.kita.orm.Validation;
@@ -115,12 +115,12 @@ public class PersonEditPageBean implements Serializable {
 		workingPerson.setSurename(aSurename);
 	}
 
-	public Kampfname getKampfname() {
-		return workingPerson.getKampfname();
+	public Nickname getNickname() {
+		return workingPerson.getNickname();
 	}
 
-	public void setKampfname(Kampfname aKampfname) {
-		workingPerson.setKampfname(aKampfname);
+	public void setNickname(Nickname aNickname) {
+		workingPerson.setNickname(aNickname);
 	}
 
 	public Email getEmail() {
