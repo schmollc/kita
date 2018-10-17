@@ -27,7 +27,7 @@ public class DockPageBean implements Serializable {
 		tournamentEventBridge = TournamentEventBridgeDecorator.newInstance();
 	}
 	
-	public boolean isNotActive() {
+	public boolean isTournamentNotActive() {
 		Optional<TournamentEvent> active = tournamentEventBridge.getActive();
 		boolean isPresent = active.isPresent();
 		return !isPresent;

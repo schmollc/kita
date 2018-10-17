@@ -43,21 +43,21 @@ public class DockPageBeanTest {
 	}
 	 
 	@Test
-	public void testIsNotActive_ForEventIsNotActive() {
+	public void testIsTournamentNotActive_ForEventIsNotActive() {
 		doReturn(Optional.empty()).when(tournamentEventBridge).getActive();
 
-		boolean condition = sut.isNotActive();
+		boolean condition = sut.isTournamentNotActive();
 
-		assertTrue("[isNotActive] was not correct!", condition);
+		assertTrue("[isTournamentNotActive] was not correct!", condition);
 	}
 
 	@Test
-	public void testIsNotActive_ForEventIsActive() {
+	public void testIsTournamentNotActive_ForEventIsActive() {
 		doReturn(Optional.of(TournamentEvent.newInstance())).when(tournamentEventBridge).getActive();
 
-		boolean condition = sut.isNotActive();
+		boolean condition = sut.isTournamentNotActive();
 
-		assertFalse("[isNotActive] was not correct!", condition);
+		assertFalse("[isTournamentNotActive] was not correct!", condition);
 	}
 	
 }
