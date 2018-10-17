@@ -38,7 +38,7 @@
 					rowKey="#{person.uuid}"
 					resizableColumns="true">
 					<f:facet name="header">
-			        	In total there are #{participantBrowsePageBean.getNumberOfResults()} persons.
+			        	In total there are #{participantBrowsePageBean.getNumberOfPersons()} persons.
 						<p:outputPanel>
 							<h:outputText value="&nbsp;" />
 						</p:outputPanel>
@@ -110,7 +110,7 @@
 					rowKey="#{participant.uuid}"
 					resizableColumns="true">
 					<f:facet name="header">
-			        	In total there are #{participantBrowsePageBean.getNumberOfResults()} participants.
+			        	In total there are #{participantBrowsePageBean.getNumberOfParticipants()} participants.
 						<p:outputPanel>
 							<h:outputText value="&nbsp;" />
 						</p:outputPanel>

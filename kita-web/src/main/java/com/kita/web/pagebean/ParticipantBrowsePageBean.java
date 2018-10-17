@@ -189,8 +189,12 @@ public class ParticipantBrowsePageBean implements Serializable {
 		return Surename.sortBySurename(name1, name2);
 	}
 
-	public Integer getNumberOfResults() {
+	public Integer getNumberOfParticipants() {
 		return searchResult == null ? 0 : searchResult.size();
+	}
+	
+	public Integer getNumberOfPersons() {
+		return persons == null ? 0 : persons.size();
 	}
 
 	void showMessageErrorNoRowSelected() {
