@@ -19,11 +19,13 @@
 			<p:menuitem
 				value="Participant"
 				icon="/images/dock/participant.png"
-				url="participantBrowse.xhtml" />
+				url="participantBrowse.xhtml" 
+				disabled="#{dockPageBean.isNotActive()}" />
 			<p:menuitem
 				value="Turnier"
 				icon="/images/dock/kita.png"
-				url="tournament.xhtml" />
+				url="tournament.xhtml"
+				disabled="#{dockPageBean.isNotActive()}" />
 			<p:menuitem
 				value="Settings"
 				icon="/images/dock/settings.png"
